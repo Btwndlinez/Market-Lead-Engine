@@ -1,14 +1,25 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+// Fail-safe for build time
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.warn("Supabase credentials missing. Engine will be unavailable.")
+}
+
+export const supabase = (supabaseUrl && supabaseAnonKey) 
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null
 
 /**
  * Standardized way to call any of your 10 Market Lead Engine functions
  */
 export const invokeEngine = async (functionName: string, payload: object) => {
+  if (!supabase) {
+    throw new Error('Supabase client not initialized. Check environment variables.')
+  }
+  
   const { data, error } = await supabase.functions.invoke(functionName, {
     body: payload,
   })
