@@ -1,8 +1,8 @@
-name: Deploy Next.js site to Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -27,22 +27,23 @@ jobs:
           node-version: "20"
           cache: 'npm'
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
       - name: Install dependencies
-        run: npm ci
+        run: npm ci # 'npm ci' is cleaner for automated runners than 'npm install'
 
-      - name: Build with Next.js
+      - name: Build project
         run: npm run build
 
-      - name: List files (Debug)
-        run: ls -R
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./out
+      # This step is the "Safety Catch"
+      - name: Verify build output
+        run: |
+          if [ -d "./out" ]; then
+            echo "Success: 'out' directory exists."
+            ls -R ./out | head -n 20
+          else
+            echo "Error: 'out' directory NOT found. Checking for '.next' instead..."
+            ls -d .*/ */
+            exit 1
+          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
