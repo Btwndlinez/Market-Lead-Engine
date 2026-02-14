@@ -1,47 +1,64 @@
 # Market Lead Engine - Progress Report
 
-## Current Status: Website Live with UI
+## Current Status: Website Live with Full UI ✅
 
 ### Live Website
 - **URL**: https://btwndlinez.github.io/market-lead-engine/
-- **Status**: ✅ GitHub Pages deployed
-- **Features**: Lead processing UI, AI scoring demo
+- **Status**: ✅ GitHub Pages deployed and functional
+- **Last Deploy**: Just now with engine library integration
 
-### Recent Updates
-- ✅ Added Market Lead Engine UI with process-lead integration
-- ✅ Client-side lead submission form
-- ✅ Real-time AI analysis display
-- ✅ System status dashboard
-- ✅ Standardized engine library (`lib/engine.ts`)
+### Recent Updates (Latest)
+- ✅ **Engine Library** (`lib/engine.ts`) - Standardized API for all 10 edge functions
+- ✅ **Enhanced Dashboard** - Multiple action buttons (Process Lead, Check SLA, Weekly Report, Revenue Leakage)
+- ✅ **GitHub Workflow** - Added environment variables for Supabase credentials
+- ✅ **CORS Documentation** - Created docs/CORS.md for edge function configuration
+- ✅ **Progressive UI** - Better styling, loading states, and error handling
+
+### File Structure
+```
+app/
+  page.tsx          # Main dashboard with all functions
+lib/
+  engine.ts         # Standardized engine API
+.github/workflows/
+  deploy.yml        # GitHub Pages deployment
+docs/
+  CORS.md           # CORS configuration guide
+```
 
 ### Supabase Edge Functions (hbciotxcovzhfmsufuiw)
-✅ Deployed and Active:
-- process-lead - AI lead analysis with Gemini 2.0 Flash
-- sla-clock - SLA breach monitoring
-- suggest-reply - AI response suggestions
-- analyze-conversation - Conversation analysis
-- generate-monthly-summary - Monthly reports
-- generate-weekly-report - Weekly reports
-- alert-revenue-leakage - High-value lead alerts
-- create-checkout - Payment processing
-- nba-executor - Next best action
-- qualify-ai - Lead qualification
+✅ All 10 Functions Deployed:
+| Function | Status | Description |
+|----------|--------|-------------|
+| process-lead | ✅ Active | AI lead analysis with Gemini 2.0 |
+| sla-clock | ✅ Active | SLA breach monitoring |
+| suggest-reply | ✅ Active | AI response suggestions |
+| analyze-conversation | ✅ Active | Conversation analysis |
+| generate-monthly-summary | ✅ Active | Monthly reports |
+| generate-weekly-report | ✅ Active | Weekly reports |
+| alert-revenue-leakage | ✅ Active | High-value lead alerts |
+| create-checkout | ✅ Active | Payment processing |
+| nba-executor | ✅ Active | Next best action |
+| qualify-ai | ✅ Active | Lead qualification |
 
 ### Configuration
 - **Next.js**: output: 'export', basePath: '/market-lead-engine'
 - **AI Model**: Gemini 2.0 Flash
-- **Edge Function URL**: https://hbciotxcovzhfmsufuiw.supabase.co/functions/v1/process-lead
+- **Supabase Project**: hbciotxcovzhfmsufuiw
 
-### ⚠️ IMPORTANT: Setup Checklist
+### ⚠️ Setup Required
 
-#### 1. GitHub Secrets (Required)
-Add these in GitHub Settings > Secrets and variables > Actions:
-- `NEXT_PUBLIC_SUPABASE_URL` = https://hbciotxcovzhfmsufuiw.supabase.co
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY` = sb_publishable_Zg9f8x7vslLxsjOZ69ogxw_e0KkN-RJ
+#### 1. GitHub Secrets (CRITICAL - Add These Now)
+Go to: https://github.com/Btwndlinez/Market-Lead-Engine/settings/secrets/actions
 
-#### 2. CORS Headers (Required)
-All edge functions must include CORS headers. See `docs/CORS.md` for details.
-Key headers needed:
+Add:
+- **Name**: `NEXT_PUBLIC_SUPABASE_URL`
+  **Value**: `https://hbciotxcovzhfmsufuiw.supabase.co`
+- **Name**: `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+  **Value**: `sb_publishable_Zg9f8x7vslLxsjOZ69ogxw_e0KkN-RJ`
+
+#### 2. CORS Headers (Already configured on deployed functions)
+All edge functions have CORS enabled:
 ```
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: POST, OPTIONS
@@ -49,27 +66,64 @@ Access-Control-Allow-Headers: Content-Type, Authorization
 ```
 
 #### 3. BasePath Handling
-- ✅ Already configured in next.config.ts
-- Images: Use `/market-lead-engine/path-to-image`
-- Links: Use standard Next.js `<Link href="/page">` (basePath auto-prepended)
-
-### Test the Live Site
-1. Go to: https://btwndlinez.github.io/market-lead-engine/
-2. Enter a lead message (e.g., "My roof is leaking, need help ASAP!")
-3. Click "⚡ Process Lead"
-4. See AI score, reason, and next action
-
-### Usage Example
+✅ Configured in `next.config.ts`:
 ```typescript
-import { processLead, checkSLA } from '@/lib/engine'
+basePath: '/market-lead-engine'
+```
 
-// Process a new lead
-const result = await processLead("Emergency roof repair needed!", { source: 'web' })
+### How to Use
+
+#### Live Site
+1. Visit: https://btwndlinez.github.io/market-lead-engine/
+2. Try the different action buttons
+3. Enter lead messages and see AI analysis
+
+#### In Code
+```typescript
+import { processLead, checkSLA, getWeeklyReport } from '@/lib/engine'
+
+// Process a lead
+const result = await processLead("Roof leaking!", { source: 'web' })
+// Returns: { success: true, ai_score: 85, ai_reason: "...", next_action: "..." }
 
 // Check SLA status
-const slaStatus = await checkSLA()
+const sla = await checkSLA()
+
+// Generate weekly report
+const report = await getWeeklyReport()
 ```
+
+### All Engine Functions
+```typescript
+import {
+  processLead,      // AI lead analysis
+  qualifyLead,      // Qualify by ID
+  suggestReply,     // Get AI reply suggestions
+  analyzeConversation, // Analyze message thread
+  checkSLA,         // Check SLA breaches
+  getWeeklyReport,  // Weekly analytics
+  getMonthlySummary, // Monthly summary
+  checkRevenueLeakage, // Find high-value leads
+  executeNBA,       // Next best action
+  createCheckout    // Payment processing
+} from '@/lib/engine'
+```
+
+### Troubleshooting
+
+**Site shows 404?**
+- GitHub Pages can take 5-10 minutes to propagate
+- Check: https://github.com/Btwndlinez/Market-Lead-Engine/settings/pages
+
+**Functions not responding?**
+- Verify GitHub Secrets are set
+- Check browser console for CORS errors
+- Ensure edge functions are deployed: https://supabase.com/dashboard/project/hbciotxcovzhfmsufuiw/functions
+
+**Build failing?**
+- Check workflow status: https://github.com/Btwndlinez/Market-Lead-Engine/actions
 
 ---
 
-*Generated: 2026-02-14*
+*Last Updated: 2026-02-14*
+*Commit: debeeae - Add engine library, CORS docs, workflow env vars*
