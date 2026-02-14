@@ -1,13 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { invokeEngine, processLead, checkSLA, getWeeklyReport, checkRevenueLeakage } from '@/lib/engine'
+import { processLead, checkSLA, getWeeklyReport, checkRevenueLeakage, invokeEngine } from '@/lib/engine'
 
 export default function Dashboard() {
   const [message, setMessage] = useState('')
   const [result, setResult] = useState<any>(null)
   const [loading, setLoading] = useState(false)
   const [activeFunction, setActiveFunction] = useState('')
+  
+  const basePath = '/market-lead-engine'
 
   const handleProcessLead = async () => {
     if (!message) return
@@ -76,168 +78,111 @@ export default function Dashboard() {
   }
 
   return (
-    <main style={{ padding: '2rem', maxWidth: '900px', margin: '0 auto', fontFamily: 'system-ui, sans-serif' }}>
-      <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Market Lead Engine</h1>
-      <p style={{ color: '#666', fontSize: '1.1rem' }}>AI-powered lead processing and qualification system</p>
-      
-      {/* Lead Processing Section */}
-      <div style={{ marginTop: '2rem', padding: '1.5rem', backgroundColor: '#f8fafc', borderRadius: '12px' }}>
-        <h2 style={{ marginTop: 0, color: '#1e293b' }}>Process New Lead</h2>
-        <textarea
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Enter lead message (e.g., 'Hey my roof is caving in after the storm!')"
-          style={{ 
-            width: '100%', 
-            height: '100px', 
-            padding: '1rem',
-            borderRadius: '8px',
-            border: '1px solid #ccc',
-            fontSize: '1rem',
-            marginBottom: '1rem'
-          }}
-        />
-        
-        <button
+    <div className="min-h-screen bg-white text-black p-8">
+      {/* HEADER: Strictly B&W */}
+      <header className="flex justify-between items-center border-b border-black pb-6 mb-12">
+        <div className="flex items-center gap-4">
+          <div className="w-10 h-10 bg-black" />
+          <h1 className="text-xl font-bold tracking-tighter uppercase">Market Lead Engine</h1>
+        </div>
+        <div className="text-xs font-mono uppercase opacity-50">System Active // v1.0</div>
+      </header>
+
+      {/* DASHBOARD GRID */}
+      <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {/* Lead Input Section */}
+        <div className="col-span-full lg:col-span-2">
+          <textarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Enter lead message (e.g., 'Hey my roof is caving in after the storm!')"
+            className="w-full h-32 p-4 border border-black rounded-none text-lg"
+          />
+        </div>
+
+        {/* Process Lead Button */}
+        <button 
           onClick={handleProcessLead}
           disabled={loading || !message}
-          style={{
-            padding: '0.75rem 1.5rem',
-            backgroundColor: loading && activeFunction === 'process-lead' ? '#ccc' : '#0070f3',
-            color: 'white',
-            border: 'none',
-            borderRadius: '8px',
-            cursor: loading ? 'not-allowed' : 'pointer',
-            fontSize: '1rem',
-            fontWeight: '600'
-          }}
+          className="engine-button col-span-full"
         >
-          {loading && activeFunction === 'process-lead' ? 'Processing...' : '⚡ Process Lead'}
+          <span className="block text-xs mb-2 opacity-50">01 / Analysis</span>
+          <span className="text-lg font-bold">
+            {loading && activeFunction === 'process-lead' ? 'Processing...' : 'Process New Lead'}
+          </span>
         </button>
-      </div>
 
-      {/* Quick Actions */}
-      <div style={{ marginTop: '2rem' }}>
-        <h3>Quick Actions</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+        {/* SLA Status */}
+        <button 
+          onClick={handleCheckSLA}
+          disabled={loading}
+          className="engine-button"
+        >
+          <span className="block text-xs mb-2 opacity-50">02 / Operations</span>
+          <span className="text-lg font-bold">
+            {loading && activeFunction === 'sla-clock' ? 'Checking...' : 'Check SLA Status'}
+          </span>
+        </button>
+
+        {/* Weekly Report */}
+        <button 
+          onClick={handleWeeklyReport}
+          disabled={loading}
+          className="engine-button"
+        >
+          <span className="block text-xs mb-2 opacity-50">03 / Reports</span>
+          <span className="text-lg font-bold">
+            {loading && activeFunction === 'generate-weekly-report' ? 'Generating...' : 'Weekly Report'}
+          </span>
+        </button>
+
+        {/* Revenue Leakage */}
+        <button 
+          onClick={handleRevenueLeakage}
+          disabled={loading}
+          className="engine-button"
+        >
+          <span className="block text-xs mb-2 opacity-50">04 / Revenue</span>
+          <span className="text-lg font-bold">
+            {loading && activeFunction === 'alert-revenue-leakage' ? 'Analyzing...' : 'Revenue Leakage'}
+          </span>
+        </button>
+
+        {/* Additional Functions */}
+        {['process-lead', 'sla-clock', 'alert-revenue-leakage', 'nba-executor', 'suggest-reply', 
+          'analyze-conversation', 'generate-monthly-summary', 'qualify-ai', 'create-checkout'].map((fn) => (
           <button
-            onClick={handleCheckSLA}
+            key={fn}
+            onClick={() => handleGenericInvoke(fn)}
             disabled={loading}
-            style={{
-              padding: '1rem',
-              backgroundColor: loading && activeFunction === 'sla-clock' ? '#ccc' : '#f59e0b',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              fontWeight: '600'
-            }}
+            className="engine-button text-left"
           >
-            {loading && activeFunction === 'sla-clock' ? 'Checking...' : '⏰ Check SLA Status'}
+            <span className="block text-xs opacity-50">{fn}</span>
           </button>
+        ))}
 
-          <button
-            onClick={handleWeeklyReport}
-            disabled={loading}
-            style={{
-              padding: '1rem',
-              backgroundColor: loading && activeFunction === 'generate-weekly-report' ? '#ccc' : '#10b981',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              fontWeight: '600'
-            }}
-          >
-            {loading && activeFunction === 'generate-weekly-report' ? 'Generating...' : '📊 Weekly Report'}
-          </button>
-
-          <button
-            onClick={handleRevenueLeakage}
-            disabled={loading}
-            style={{
-              padding: '1rem',
-              backgroundColor: loading && activeFunction === 'alert-revenue-leakage' ? '#ccc' : '#ef4444',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              fontWeight: '600'
-            }}
-          >
-            {loading && activeFunction === 'alert-revenue-leakage' ? 'Checking...' : '💰 Revenue Leakage'}
-          </button>
-        </div>
-      </div>
-
-      {/* Results Display */}
-      {result && (
-        <div style={{ 
-          marginTop: '2rem', 
-          padding: '1.5rem',
-          backgroundColor: result.error ? '#fee' : '#f0f9ff',
-          borderRadius: '12px',
-          border: `2px solid ${result.error ? '#fcc' : '#bae6fd'}`
-        }}>
-          <h2 style={{ marginTop: 0 }}>
-            {result.error ? '❌ Error' : '✅ Result'}
-            {activeFunction && <span style={{ fontSize: '0.8em', color: '#666', marginLeft: '1rem' }}>({activeFunction})</span>}
-          </h2>
-          <pre style={{ 
-            backgroundColor: '#fff', 
-            padding: '1rem',
-            borderRadius: '8px',
-            overflow: 'auto',
-            fontSize: '0.9rem',
-            border: '1px solid #e5e7eb'
-          }}>
-            {JSON.stringify(result, null, 2)}
-          </pre>
-        </div>
-      )}
-
-      {/* System Status */}
-      <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '2px solid #eee' }}>
-        <h3>System Status</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' }}>
-          <div style={{ padding: '1rem', backgroundColor: '#f0fdf4', borderRadius: '8px', border: '1px solid #bbf7d0' }}>
-            <strong>✅ AI Engine</strong>
-            <p style={{ margin: '0.5rem 0 0', fontSize: '0.9rem', color: '#166534' }}>Gemini 2.0 Flash active</p>
+        {/* Results Display */}
+        {result && (
+          <div className={`col-span-full p-6 border ${result.error ? 'border-red-500 bg-red-50' : 'border-black bg-gray-50'}`}>
+            <h2 className="text-lg font-bold mb-4">
+              {result.error ? 'Error' : 'Result'}
+              {activeFunction && <span className="text-xs font-normal opacity-50 ml-2">({activeFunction})</span>}
+            </h2>
+            <pre className="text-sm overflow-auto bg-white p-4 border border-gray-200">
+              {JSON.stringify(result, null, 2)}
+            </pre>
           </div>
-          <div style={{ padding: '1rem', backgroundColor: '#f0f9ff', borderRadius: '8px', border: '1px solid #bae6fd' }}>
-            <strong>✅ Edge Functions</strong>
-            <p style={{ margin: '0.5rem 0 0', fontSize: '0.9rem', color: '#0369a1' }}>10 functions deployed</p>
-          </div>
-          <div style={{ padding: '1rem', backgroundColor: '#fef3c7', borderRadius: '8px', border: '1px solid #fde68a' }}>
-            <strong>✅ SLA Monitoring</strong>
-            <p style={{ margin: '0.5rem 0 0', fontSize: '0.9rem', color: '#92400e' }}>Real-time tracking</p>
-          </div>
+        )}
+      </main>
+
+      {/* Footer */}
+      <footer className="mt-16 pt-6 border-t border-black text-xs font-mono uppercase opacity-50">
+        <div className="flex justify-between">
+          <span>10 Edge Functions Active</span>
+          <span>Gemini 2.0 Flash</span>
+          <span>hbciotxcovzhfmsufuiw</span>
         </div>
-        
-        <h3 style={{ marginTop: '2rem' }}>All Deployed Functions</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.5rem' }}>
-          {['process-lead', 'sla-clock', 'alert-revenue-leakage', 'nba-executor', 'suggest-reply', 
-            'analyze-conversation', 'generate-weekly-report', 'generate-monthly-summary', 
-            'qualify-ai', 'create-checkout'].map(fn => (
-            <button
-              key={fn}
-              onClick={() => handleGenericInvoke(fn)}
-              disabled={loading}
-              style={{
-                padding: '0.5rem',
-                backgroundColor: '#f3f4f6',
-                border: '1px solid #d1d5db',
-                borderRadius: '6px',
-                cursor: loading ? 'not-allowed' : 'pointer',
-                fontSize: '0.85rem',
-                textAlign: 'left'
-              }}
-            >
-              {fn}
-            </button>
-          ))}
-        </div>
-      </div>
-    </main>
+      </footer>
+    </div>
   )
 }

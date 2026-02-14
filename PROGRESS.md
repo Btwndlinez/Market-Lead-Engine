@@ -31,6 +31,7 @@ The engine functions won't work until you add these secrets:
 | **Automation & Sales** | nba-executor, create-checkout |
 
 ### Recent Updates (Latest)
+- ✅ **Monochrome-to-Motion UI** - New brutalist design with grayscale buttons that animate on hover
 - ✅ **Fail-safe Engine** - Added credential check to prevent build failures when env vars missing
 - ✅ **Supabase Dependency** - Added `@supabase/supabase-js` to fix build errors
 - ✅ **.nojekyll Fix** - Added to prevent Jekyll from ignoring `_next/` folder
