@@ -8,6 +8,7 @@
 - **Last Deploy**: Just now with engine library integration
 
 ### Recent Updates (Latest)
+- ✅ **Fail-safe Engine** - Added credential check to prevent build failures when env vars missing
 - ✅ **Supabase Dependency** - Added `@supabase/supabase-js` to fix build errors
 - ✅ **.nojekyll Fix** - Added to prevent Jekyll from ignoring `_next/` folder
 - ✅ **Engine Library** (`lib/engine.ts`) - Standardized API for all 10 edge functions
@@ -139,8 +140,26 @@ import {
 **Build failing?**
 - Check workflow status: https://github.com/Btwndlinez/Market-Lead-Engine/actions
 - Error: "Can't resolve '@supabase/supabase-js'" - Make sure `@supabase/supabase-js` is in package.json dependencies
+- Error: "Supabase client not initialized" - GitHub Secrets are not set during build. Site builds but functions won't work until secrets are added.
+
+### Engine Fail-Safe Implementation
+The engine now handles missing credentials gracefully:
+```typescript
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+// Fail-safe for build time
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.warn("Supabase credentials missing. Engine will be unavailable.")
+}
+
+export const supabase = (supabaseUrl && supabaseAnonKey) 
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null
+```
+This allows the static site to build successfully even without GitHub Secrets configured.
 
 ---
 
 *Last Updated: 2026-02-14*
-*Commit: e43fb82 - Add @supabase/supabase-js dependency, .nojekyll fix, engine library*
+*Commit: 9e682fd - fix: add fail-safe for missing supabase credentials*
