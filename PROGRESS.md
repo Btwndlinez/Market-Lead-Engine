@@ -4,8 +4,31 @@
 
 ### Live Website
 - **URL**: https://btwndlinez.github.io/market-lead-engine/
-- **Status**: ✅ GitHub Pages deployed and functional
-- **Last Deploy**: Just now with engine library integration
+- **Status**: ✅ GitHub Pages deployed
+- **Engine Functions**: ⚠️ REQUIRES GitHub Secrets to work
+
+### ⚠️ CRITICAL: Add GitHub Secrets Now
+The engine functions won't work until you add these secrets:
+
+1. Go to: https://github.com/Btwndlinez/Market-Lead-Engine/settings/secrets/actions
+2. Add these TWO secrets:
+
+| Secret Name | Secret Value |
+|-------------|---------------|
+| `NEXT_PUBLIC_SUPABASE_URL` | `https://hbciotxcovzhfmsufuiw.supabase.co` |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | `sb_publishable_Zg9f8x7vslLxsjOZ69ogxw_e0KkN-RJ` |
+
+3. Re-run the workflow after adding secrets
+
+### 🚦 10 Deployed Functions Summary
+
+| Category | Functions |
+|----------|-----------|
+| **Lead Analysis** | process-lead (Gemini 2.0 Flash), qualify-ai |
+| **Operational Monitoring** | sla-clock, alert-revenue-leakage |
+| **Conversation & Support** | suggest-reply, analyze-conversation |
+| **Business Intelligence** | generate-weekly-report, generate-monthly-summary |
+| **Automation & Sales** | nba-executor, create-checkout |
 
 ### Recent Updates (Latest)
 - ✅ **Fail-safe Engine** - Added credential check to prevent build failures when env vars missing
@@ -49,18 +72,9 @@ docs/
 - **AI Model**: Gemini 2.0 Flash
 - **Supabase Project**: hbciotxcovzhfmsufuiw
 
-### ⚠️ Setup Required
+### Setup Required
 
-#### 1. GitHub Secrets (CRITICAL - Add These Now)
-Go to: https://github.com/Btwndlinez/Market-Lead-Engine/settings/secrets/actions
-
-Add:
-- **Name**: `NEXT_PUBLIC_SUPABASE_URL`
-  **Value**: `https://hbciotxcovzhfmsufuiw.supabase.co`
-- **Name**: `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-  **Value**: `sb_publishable_Zg9f8x7vslLxsjOZ69ogxw_e0KkN-RJ`
-
-#### 2. CORS Headers (Already configured on deployed functions)
+#### CORS Headers (Already configured on deployed functions)
 All edge functions have CORS enabled:
 ```
 Access-Control-Allow-Origin: *
@@ -68,13 +82,13 @@ Access-Control-Allow-Methods: POST, OPTIONS
 Access-Control-Allow-Headers: Content-Type, Authorization
 ```
 
-#### 3. BasePath Handling
+#### BasePath Handling
 ✅ Configured in `next.config.ts`:
 ```typescript
 basePath: '/market-lead-engine'
 ```
 
-#### 4. .nojekyll File (CRITICAL)
+#### .nojekyll File
 GitHub Pages uses Jekyll by default, which ignores folders starting with underscore (`_`). Next.js puts files in `_next/` folder.
 
 ✅ **Fixed**: Workflow now creates `.nojekyll` file automatically:
@@ -83,7 +97,7 @@ GitHub Pages uses Jekyll by default, which ignores folders starting with undersc
   run: touch out/.nojekyll
 ```
 
-#### 5. GitHub Pages Source Setting
+#### GitHub Pages Source Setting
 ✅ Must be set to "GitHub Actions" not "Deploy from a branch"
 - Go to: https://github.com/Btwndlinez/Market-Lead-Engine/settings/pages
 - Source: Select **GitHub Actions**
