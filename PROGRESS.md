@@ -8,6 +8,7 @@
 - **Last Deploy**: Just now with engine library integration
 
 ### Recent Updates (Latest)
+- ✅ **.nojekyll Fix** - Added to prevent Jekyll from ignoring `_next/` folder
 - ✅ **Engine Library** (`lib/engine.ts`) - Standardized API for all 10 edge functions
 - ✅ **Enhanced Dashboard** - Multiple action buttons (Process Lead, Check SLA, Weekly Report, Revenue Leakage)
 - ✅ **GitHub Workflow** - Added environment variables for Supabase credentials
@@ -70,6 +71,20 @@ Access-Control-Allow-Headers: Content-Type, Authorization
 ```typescript
 basePath: '/market-lead-engine'
 ```
+
+#### 4. .nojekyll File (CRITICAL)
+GitHub Pages uses Jekyll by default, which ignores folders starting with underscore (`_`). Next.js puts files in `_next/` folder.
+
+✅ **Fixed**: Workflow now creates `.nojekyll` file automatically:
+```yaml
+- name: Create .nojekyll file
+  run: touch out/.nojekyll
+```
+
+#### 5. GitHub Pages Source Setting
+✅ Must be set to "GitHub Actions" not "Deploy from a branch"
+- Go to: https://github.com/Btwndlinez/Market-Lead-Engine/settings/pages
+- Source: Select **GitHub Actions**
 
 ### How to Use
 
