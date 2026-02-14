@@ -8,6 +8,7 @@
 - **Last Deploy**: Just now with engine library integration
 
 ### Recent Updates (Latest)
+- ✅ **Supabase Dependency** - Added `@supabase/supabase-js` to fix build errors
 - ✅ **.nojekyll Fix** - Added to prevent Jekyll from ignoring `_next/` folder
 - ✅ **Engine Library** (`lib/engine.ts`) - Standardized API for all 10 edge functions
 - ✅ **Enhanced Dashboard** - Multiple action buttons (Process Lead, Check SLA, Weekly Report, Revenue Leakage)
@@ -137,8 +138,9 @@ import {
 
 **Build failing?**
 - Check workflow status: https://github.com/Btwndlinez/Market-Lead-Engine/actions
+- Error: "Can't resolve '@supabase/supabase-js'" - Make sure `@supabase/supabase-js` is in package.json dependencies
 
 ---
 
 *Last Updated: 2026-02-14*
-*Commit: debeeae - Add engine library, CORS docs, workflow env vars*
+*Commit: e43fb82 - Add @supabase/supabase-js dependency, .nojekyll fix, engine library*
