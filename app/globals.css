@@ -5,29 +5,31 @@
 :root {
   --bg: #ffffff;
   --fg: #000000;
-  --accent: #2563eb;
 }
 
 body {
   background: var(--bg);
   color: var(--fg);
   font-family: 'Inter', sans-serif;
-  -webkit-font-smoothing: antialiased;
 }
 
-/* Grayscale by default, color on interaction */
-.engine-card {
+/* Grayscale by default, full color on hover */
+.action-card {
   border: 2px solid black;
-  padding: 1.5rem;
+  padding: 2rem;
   transition: all 0.3s ease;
-  background: white;
   cursor: pointer;
+  background: white;
   filter: grayscale(100%);
 }
 
-.engine-card:hover {
+.action-card:hover {
   filter: grayscale(0%);
-  border-color: var(--accent);
+  border-color: #2563eb;
   transform: translateY(-4px);
-  box-shadow: 6px 6px 0px 0px rgba(0,0,0,1);
+  box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
+}
+
+.action-card:active {
+  transform: scale(0.95);
 }

@@ -31,6 +31,8 @@ The engine functions won't work until you add these secrets:
 | **Automation & Sales** | nba-executor, create-checkout |
 
 ### Recent Updates (Latest)
+- ✅ **Action Cards** - Clean monochrome design with `action-card` class
+- ✅ **Grayscale to Color** - Full color reveal on hover with brutalist shadow pop
 - ✅ **BasePath Fix** - Changed to /Market-Lead-Engine (capitalized to match repo)
 - ✅ **Monochrome Pop Design** - Grayscale by default, color pop on hover with brutalist box-shadow
 - ✅ **Monochrome-to-Motion UI** - New brutalist design with grayscale buttons that animate on hover
