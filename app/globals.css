@@ -14,7 +14,9 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-/* Grayscale by default, color pops on hover/click */
+/* Market Lead Engine - v2.0 Styles */
+/* Force rebuild: 2026-02-14 */
+
 .engine-card {
   border: 2px solid black;
   padding: 2rem;
@@ -33,4 +35,17 @@ body {
 
 .engine-card:active {
   transform: scale(0.95);
+}
+
+/* Ensure buttons are visible and styled */
+button.engine-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+
+button.engine-card:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
