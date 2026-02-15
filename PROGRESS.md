@@ -37,6 +37,28 @@ ON public.sla_snapshots
 FOR SELECT 
 TO authenticated 
 USING (true);
+
+-- Referral Policies
+-- Allow anyone to insert a referral
+CREATE POLICY "Enable insert for anonymous users" 
+ON public.referrals 
+FOR INSERT 
+TO anon 
+WITH CHECK (true);
+
+-- Allow users to see only their own data
+CREATE POLICY "Users can view their own referrals" 
+ON public.referrals 
+FOR SELECT 
+TO authenticated 
+USING (auth.uid() = user_id);
+
+-- Allow users to insert their own data
+CREATE POLICY "Users can create their own referrals" 
+ON public.referrals 
+FOR INSERT 
+TO authenticated 
+WITH CHECK (auth.uid() = user_id);
 ```
 
 ### 🚦 10 Deployed Functions Summary
@@ -50,9 +72,9 @@ USING (true);
 | **Automation & Sales** | nba-executor, create-checkout |
 
 ### Recent Updates
+- ✅ **RLS Policies** - Added for referrals table (anon insert, authenticated read/insert)
 - ✅ **CORS Headers** - Added to edge functions for GitHub Pages compatibility
 - ✅ **Action Cards** - Clean monochrome design with `action-card` class
-- ✅ **Grayscale to Color** - Full color reveal on hover with brutalist shadow pop
 - ✅ **Grayscale to Color** - Full color reveal on hover with brutalist shadow pop
 - ✅ **BasePath Fix** - Changed to /Market-Lead-Engine (capitalized to match repo)
 - ✅ **Monochrome Pop Design** - Grayscale by default, color pop on hover with brutalist box-shadow
