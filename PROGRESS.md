@@ -8,6 +8,7 @@
 - **Last Deployment**: February 14, 2026
 - **Engine Functions**: ✅ Active with CORS enabled
 - **Design**: Monochrome brutalist with grayscale-to-color hover effects
+- **Cache Note**: If styles don't appear, use `?v=2` or hard refresh (Ctrl+Shift+R)
 
 ### ⚠️ CRITICAL: Add GitHub Secrets Now
 The engine functions won't work until you add these secrets:
