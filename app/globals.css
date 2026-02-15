@@ -2,12 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg: #ffffff;
+  --fg: #000000;
+  --accent: #2563eb;
+}
+
 body {
-  background: white;
-  color: black;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-button {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+/* Grayscale by default, color on interaction */
+.engine-card {
+  border: 2px solid black;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  background: white;
+  cursor: pointer;
+  filter: grayscale(100%);
+}
+
+.engine-card:hover {
+  filter: grayscale(0%);
+  border-color: var(--accent);
+  transform: translateY(-4px);
+  box-shadow: 6px 6px 0px 0px rgba(0,0,0,1);
 }
