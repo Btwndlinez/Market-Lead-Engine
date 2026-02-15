@@ -136,16 +136,21 @@ a {
   transition: color var(--transition-speed) ease;
 }
 
-/* Logo lightning bolt — always red */
+/* Logo lightning bolt — always red, solid fill */
 .nav-logo-icon-red {
-  background: transparent !important;
+  background: var(--fg) !important;
+  /* Inverse background (black in light mode, white in dark mode) */
   border: none !important;
 }
 
 .nav-logo-icon-red svg {
   color: #dc2626 !important;
-  width: 24px;
-  height: 24px;
+  /* Red color */
+  fill: #dc2626 !important;
+  /* Solid fill */
+  width: 18px;
+  /* Slightly smaller to fit in box nicely */
+  height: 18px;
 }
 
 .nav-links {

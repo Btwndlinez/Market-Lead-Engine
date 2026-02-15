@@ -5,7 +5,7 @@
 ### Live Website
 - **URL**: https://btwndlinez.github.io/Market-Lead-Engine/
 - **Status**: ✅ GitHub Pages deployed - **LIVE**
-- **Last Deployment**: February 15, 2026 (v3 — red accent)
+- **Last Deployment**: February 15, 2026 (v4 — solid red bolt + inverse box)
 - **Engine Functions**: ✅ Active with CORS enabled
 - **Design**: Magnetly-inspired B&W with adaptive day/night mode
 - **Cache Note**: If styles don't appear, use `?v=3` or hard refresh (Ctrl+Shift+R)
@@ -96,7 +96,7 @@ USING (true);
 
 ### Recent Updates
 - ✅ **Red Accent Color** - Changed hover/interaction accent from purple to red (#dc2626 light / #f87171 dark)
-- ✅ **Permanent Red Logo** - Lightning bolt icon stays red in both day and night mode
+- ✅ **Permanent Red Logo** - Lightning bolt is now a **SOLID** red icon inside an **INVERSE** colored box (Black in Light Mode, White in Dark Mode)
 - ✅ **Magnetly-Inspired Redesign** - Clean B&W design with red accent on hover/interaction
 - ✅ **Day/Night Adaptive Mode** - Toggle in nav, system preference detection, persists via localStorage
 - ✅ **Floating Pill Navigation** - Glassmorphism nav bar with blur effect, pill-shaped CTA buttons
@@ -130,7 +130,7 @@ USING (true);
 - **Navigation**: Floating pill-shaped navbar with glassmorphism (`backdrop-filter: blur`)
 - **Cards**: Rounded rectangles with thin borders, animated top-border accent on hover
 - **Buttons**: Pill-shaped (full border-radius), solid black → red accent on hover
-- **Logo**: Lightning bolt always red (#dc2626) via `.nav-logo-icon-red`, unaffected by theme
+- **Logo**: Solid red bolt (#dc2626) inside an inverse-colored box (`var(--fg)` bg) for high contrast
 - **Typography**: Inter font, -0.04em letter-spacing on headings
 - **Theme Toggle**: 48×26px toggle switch with smooth knob transition
 - **Background**: Subtle dot-grid pattern (`radial-gradient`, 24px spacing)
@@ -281,4 +281,4 @@ This allows the static site to build successfully even without GitHub Secrets co
 ---
 
 *Last Updated: 2026-02-15*
-*Commit: Red accent + permanent red logo lightning bolt*
+*Commit: Solid red bolt + inverse logo box*
