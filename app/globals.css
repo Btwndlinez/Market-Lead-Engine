@@ -5,6 +5,7 @@
 :root {
   --bg: #ffffff;
   --fg: #000000;
+  --accent: #2563eb; 
 }
 
 body {
@@ -13,23 +14,23 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-/* Grayscale by default, full color on hover */
-.action-card {
+/* Grayscale by default, color pops on hover/click */
+.engine-card {
   border: 2px solid black;
   padding: 2rem;
   transition: all 0.3s ease;
-  cursor: pointer;
   background: white;
+  cursor: pointer;
   filter: grayscale(100%);
 }
 
-.action-card:hover {
+.engine-card:hover {
   filter: grayscale(0%);
-  border-color: #2563eb;
+  border-color: var(--accent);
   transform: translateY(-4px);
   box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
 }
 
-.action-card:active {
+.engine-card:active {
   transform: scale(0.95);
 }

@@ -3,7 +3,7 @@
 ## Current Status: Website Live with Full UI ✅
 
 ### Live Website
-- **URL**: https://btwndlinez.github.io/market-lead-engine/
+- **URL**: https://btwndlinez.github.io/Market-Lead-Engine/
 - **Status**: ✅ GitHub Pages deployed
 - **Engine Functions**: ⚠️ REQUIRES GitHub Secrets to work
 
