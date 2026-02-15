@@ -59,6 +59,26 @@ ON public.referrals
 FOR INSERT 
 TO authenticated 
 WITH CHECK (auth.uid() = user_id);
+
+-- Additional Security Policies
+-- 1. Enable RLS on all remaining tables
+ALTER TABLE public.sla_snapshots ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.provider_settlements ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.referrals ENABLE ROW LEVEL SECURITY;
+
+-- 2. Service role full access for Edge Functions
+CREATE POLICY "Service role full access" 
+ON public.referrals 
+TO service_role 
+USING (true) 
+WITH CHECK (true);
+
+-- 3. Public read-only for SLA snapshots
+CREATE POLICY "Allow public read-only for snapshots" 
+ON public.sla_snapshots 
+FOR SELECT 
+TO anon 
+USING (true);
 ```
 
 ### 🚦 10 Deployed Functions Summary
@@ -72,7 +92,7 @@ WITH CHECK (auth.uid() = user_id);
 | **Automation & Sales** | nba-executor, create-checkout |
 
 ### Recent Updates
-- ✅ **RLS Policies** - Added for referrals table (anon insert, authenticated read/insert)
+- ✅ **RLS Policies** - Added comprehensive policies (service role, public read, anon insert)
 - ✅ **CORS Headers** - Added to edge functions for GitHub Pages compatibility
 - ✅ **Action Cards** - Clean monochrome design with `action-card` class
 - ✅ **Grayscale to Color** - Full color reveal on hover with brutalist shadow pop
