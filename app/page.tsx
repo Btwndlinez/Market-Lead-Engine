@@ -2,121 +2,131 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { processLead, checkSLA, checkRevenueLeakage, invokeEngine } from '@/lib/engine'
+import { processLead, checkSLA, checkRevenueLeakage, qualifyLead, getMonthlySummary, createCheckout, invokeEngine } from '@/lib/engine'
 
 export default function Home() {
   const [result, setResult] = useState<any>(null)
   const [loading, setLoading] = useState(false)
   const basePath = '/Market-Lead-Engine'
 
-  const handleProcessLead = async () => {
+  const handleAction = async (fn: () => Promise<any>, name: string) => {
     setLoading(true)
     try {
-      const data = await processLead("Manual Trigger", {})
+      const data = await fn()
       setResult(data)
     } catch (error: any) {
-      setResult({ error: error.message || 'Failed to process lead' })
+      setResult({ error: error.message || `Failed: ${name}` })
     }
     setLoading(false)
   }
 
-  const handleCheckSLA = async () => {
-    setLoading(true)
-    try {
-      const data = await checkSLA()
-      setResult(data)
-    } catch (error: any) {
-      setResult({ error: error.message || 'Failed to check SLA' })
-    }
-    setLoading(false)
-  }
-
-  const handleRevenueLeakage = async () => {
-    setLoading(true)
-    try {
-      const data = await checkRevenueLeakage()
-      setResult(data)
-    } catch (error: any) {
-      setResult({ error: error.message || 'Failed to check leakage' })
-    }
-    setLoading(false)
-  }
-
-  const handleGenericInvoke = async (fnName: string) => {
+  const handleGeneric = async (fnName: string) => {
     setLoading(true)
     try {
       const data = await invokeEngine(fnName, { test: true })
       setResult(data)
     } catch (error: any) {
-      setResult({ error: error.message || `Failed to invoke ${fnName}` })
+      setResult({ error: error.message || `Failed: ${fnName}` })
     }
     setLoading(false)
   }
 
   return (
-    <div className="min-h-screen bg-white text-black selection:bg-blue-500 selection:text-white">
+    <div className="min-h-screen bg-white text-black selection:bg-blue-500 selection:text-white font-mono">
       {/* Header */}
-      <header className="border-b border-black p-6 flex justify-between items-center">
-        <div className="flex items-center gap-3">
-          <Image 
-            src={`${basePath}/logo.png`} 
-            alt="Engine Logo" 
-            width={32} 
-            height={32} 
-            className="invert" 
-          />
-          <h1 className="text-xl font-black uppercase tracking-tighter">Market Lead Engine</h1>
-        </div>
-        <div className="hidden md:block text-[10px] font-mono uppercase opacity-40">
-          Terminal Status: Online // Port: 443
+      <header className="border-b-4 border-black p-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Image 
+              src={`${basePath}/logo.png`} 
+              alt="Engine Logo" 
+              width={32} 
+              height={32} 
+              className="invert" 
+            />
+            <h1 className="text-2xl font-black uppercase tracking-tighter">Market Lead Engine v1.0</h1>
+          </div>
+          <div className="text-[10px] uppercase opacity-40">
+            Terminal Status: Online // Port: 443
+          </div>
         </div>
       </header>
 
       {/* Main Grid */}
-      <main className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <main className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        {/* Module 1 */}
+        {/* ACTION 1: QUALIFY */}
         <button 
-          onClick={handleProcessLead}
+          onClick={() => handleAction(() => qualifyLead('test-id'), 'qualifyLead')}
           disabled={loading}
-          className="group border border-black p-8 text-left transition-all duration-300 hover:bg-blue-600 hover:text-white hover:border-blue-600 active:scale-95 disabled:opacity-50"
+          className="border-2 border-black p-8 text-left transition-all hover:bg-black hover:text-white group disabled:opacity-50"
         >
-          <span className="block text-[10px] font-mono mb-4 opacity-50 group-hover:opacity-100">01_ANALYSIS</span>
-          <h2 className="text-2xl font-bold leading-none">Process Lead</h2>
-          <p className="mt-4 text-sm opacity-60 group-hover:opacity-100">Invoke Gemini 2.0 to analyze current lead stack.</p>
+          <span className="text-xs block mb-2 opacity-50 group-hover:opacity-100">ACTION_01</span>
+          <h2 className="text-xl font-bold uppercase">Qualify AI</h2>
+          <p className="mt-2 text-sm opacity-60 group-hover:opacity-100">Analyze and qualify leads automatically.</p>
         </button>
 
-        {/* Module 2 */}
+        {/* ACTION 2: MONTHLY SUMMARY */}
         <button 
-          onClick={handleCheckSLA}
+          onClick={() => handleAction(() => getMonthlySummary(), 'getMonthlySummary')}
           disabled={loading}
-          className="group border border-black p-8 text-left transition-all duration-300 hover:bg-black hover:text-white active:scale-95 disabled:opacity-50"
+          className="border-2 border-black p-8 text-left transition-all hover:bg-black hover:text-white group disabled:opacity-50"
         >
-          <span className="block text-[10px] font-mono mb-4 opacity-50 group-hover:opacity-100">02_OPERATIONS</span>
-          <h2 className="text-2xl font-bold leading-none">SLA Status</h2>
-          <p className="mt-4 text-sm opacity-60 group-hover:opacity-100">Check response times and identify breaches.</p>
+          <span className="text-xs block mb-2 opacity-50 group-hover:opacity-100">ACTION_02</span>
+          <h2 className="text-xl font-bold uppercase">Monthly Summary</h2>
+          <p className="mt-2 text-sm opacity-60 group-hover:opacity-100">Generate comprehensive monthly reports.</p>
         </button>
 
-        {/* Module 3 */}
+        {/* ACTION 3: CHECKOUT */}
         <button 
-          onClick={handleRevenueLeakage}
+          onClick={() => handleAction(() => createCheckout([{id: 'prod_123', name: 'Test Product'}]), 'createCheckout')}
           disabled={loading}
-          className="group border border-black p-8 text-left transition-all duration-300 hover:bg-red-600 hover:text-white hover:border-red-600 active:scale-95 disabled:opacity-50"
+          className="border-2 border-black p-8 text-left transition-all hover:bg-black hover:text-white group disabled:opacity-50"
         >
-          <span className="block text-[10px] font-mono mb-4 opacity-50 group-hover:opacity-100">03_FINANCE</span>
-          <h2 className="text-2xl font-bold leading-none">Revenue Leak</h2>
-          <p className="mt-4 text-sm opacity-60 group-hover:opacity-100">Find high-value leads currently unassigned.</p>
+          <span className="text-xs block mb-2 opacity-50 group-hover:opacity-100">ACTION_03</span>
+          <h2 className="text-xl font-bold uppercase">Create Checkout</h2>
+          <p className="mt-2 text-sm opacity-60 group-hover:opacity-100">Initialize payment flow for leads.</p>
+        </button>
+
+        {/* PROCESS LEAD */}
+        <button 
+          onClick={() => handleAction(() => processLead("Manual Trigger", { source: 'dashboard' }), 'processLead')}
+          disabled={loading}
+          className="border-2 border-black p-8 text-left transition-all hover:bg-blue-600 hover:text-white group disabled:opacity-50"
+        >
+          <span className="text-xs block mb-2 opacity-50 group-hover:opacity-100">ANALYSIS</span>
+          <h2 className="text-xl font-bold uppercase">Process Lead</h2>
+        </button>
+
+        {/* SLA STATUS */}
+        <button 
+          onClick={() => handleAction(() => checkSLA(), 'checkSLA')}
+          disabled={loading}
+          className="border-2 border-black p-8 text-left transition-all hover:bg-black hover:text-white group disabled:opacity-50"
+        >
+          <span className="text-xs block mb-2 opacity-50 group-hover:opacity-100">OPERATIONS</span>
+          <h2 className="text-xl font-bold uppercase">SLA Status</h2>
+        </button>
+
+        {/* REVENUE LEAK */}
+        <button 
+          onClick={() => handleAction(() => checkRevenueLeakage(), 'checkRevenueLeakage')}
+          disabled={loading}
+          className="border-2 border-black p-8 text-left transition-all hover:bg-red-600 hover:text-white group disabled:opacity-50"
+        >
+          <span className="text-xs block mb-2 opacity-50 group-hover:opacity-100">FINANCE</span>
+          <h2 className="text-xl font-bold uppercase">Revenue Leak</h2>
         </button>
 
         {/* Additional Functions */}
-        {['nba-executor', 'suggest-reply', 'analyze-conversation', 'generate-weekly-report', 'generate-monthly-summary', 'qualify-ai', 'create-checkout'].map((fn) => (
+        {['nba-executor', 'suggest-reply', 'analyze-conversation', 'generate-weekly-report'].map((fn) => (
           <button
             key={fn}
-            onClick={() => handleGenericInvoke(fn)}
+            onClick={() => handleGeneric(fn)}
             disabled={loading}
-            className="group border border-black p-6 text-left transition-all duration-300 hover:bg-gray-100 active:scale-95 disabled:opacity-50"
+            className="border-2 border-black p-6 text-left transition-all hover:bg-gray-100 group disabled:opacity-50"
           >
-            <span className="block text-[10px] font-mono opacity-50">{fn}</span>
+            <span className="text-xs uppercase opacity-50">{fn}</span>
           </button>
         ))}
 
@@ -124,10 +134,10 @@ export default function Home() {
 
       {/* Result Display */}
       {result && (
-        <div className="p-6 mt-4">
-          <div className={`border ${result.error ? 'border-red-500 bg-red-50' : 'border-black bg-gray-50'} p-6`}>
-            <h3 className="text-sm font-mono uppercase mb-2">{result.error ? 'Error' : 'Result'}</h3>
-            <pre className="text-xs overflow-auto">
+        <div className="p-6">
+          <div className={`border-2 ${result.error ? 'border-red-500 bg-red-50' : 'border-black bg-gray-50'} p-6`}>
+            <h3 className="text-sm font-bold uppercase mb-2">{result.error ? 'ERROR' : 'SUCCESS'}</h3>
+            <pre className="text-xs overflow-auto max-h-64">
               {JSON.stringify(result, null, 2)}
             </pre>
           </div>
@@ -135,9 +145,9 @@ export default function Home() {
       )}
 
       {/* Footer */}
-      <footer className="border-t border-black p-6 mt-12">
-        <div className="text-[10px] font-mono uppercase opacity-40 flex justify-between">
-          <span>10 Edge Functions</span>
+      <footer className="border-t-4 border-black p-6 mt-12">
+        <div className="text-[10px] uppercase opacity-40 flex justify-between">
+          <span>10 Edge Functions Active</span>
           <span>Gemini 2.0 Flash</span>
           <span>hbciotxcovzhfmsufuiw</span>
         </div>
