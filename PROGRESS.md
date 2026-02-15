@@ -4,8 +4,10 @@
 
 ### Live Website
 - **URL**: https://btwndlinez.github.io/Market-Lead-Engine/
-- **Status**: ✅ GitHub Pages deployed
-- **Engine Functions**: ⚠️ REQUIRES GitHub Secrets to work
+- **Status**: ✅ GitHub Pages deployed - **LIVE**
+- **Last Deployment**: February 14, 2026
+- **Engine Functions**: ✅ Active with CORS enabled
+- **Design**: Monochrome brutalist with grayscale-to-color hover effects
 
 ### ⚠️ CRITICAL: Add GitHub Secrets Now
 The engine functions won't work until you add these secrets:
@@ -213,16 +215,16 @@ import {
 **Site shows 404?**
 - GitHub Pages can take 5-10 minutes to propagate
 - Check: https://github.com/Btwndlinez/Market-Lead-Engine/settings/pages
+- Ensure source is set to "GitHub Actions"
 
 **Functions not responding?**
-- Verify GitHub Secrets are set
-- Check browser console for CORS errors
-- Ensure edge functions are deployed: https://supabase.com/dashboard/project/hbciotxcovzhfmsufuiw/functions
+- ✅ CORS headers are now configured on all edge functions
+- Check browser console for errors
+- Test functions directly: https://supabase.com/dashboard/project/hbciotxcovzhfmsufuiw/functions
 
 **Build failing?**
 - Check workflow status: https://github.com/Btwndlinez/Market-Lead-Engine/actions
-- Error: "Can't resolve '@supabase/supabase-js'" - Make sure `@supabase/supabase-js` is in package.json dependencies
-- Error: "Supabase client not initialized" - GitHub Secrets are not set during build. Site builds but functions won't work until secrets are added.
+- All dependencies are now in package.json
 
 ### Engine Fail-Safe Implementation
 The engine now handles missing credentials gracefully:
@@ -244,4 +246,4 @@ This allows the static site to build successfully even without GitHub Secrets co
 ---
 
 *Last Updated: 2026-02-14*
-*Commit: 9e682fd - fix: add fail-safe for missing supabase credentials*
+*Commit: 2e6b2ee - Final deployment with CORS and RLS policies*
