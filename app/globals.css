@@ -4,7 +4,7 @@
 
 /* ===== DESIGN SYSTEM — Magnetly-Inspired B&W with Adaptive Day/Night ===== */
 
-/* ---------- Light (default) ---------- */
+/* ---------- Light (default) - RED LIGHTNING EDITION ---------- */
 :root {
   --bg: #ffffff;
   --bg-secondary: #fafafa;
@@ -14,10 +14,10 @@
   --fg-muted: #a3a3a3;
   --border: #e5e5e5;
   --border-hover: #d4d4d4;
-  --accent: #6d28d9;
-  /* purple accent on hover */
-  --accent-light: #8b5cf6;
-  --accent-glow: rgba(109, 40, 217, 0.12);
+  --accent: #dc2626;
+  /* RED LIGHTNING - High intensity red */
+  --accent-light: #ef4444;
+  --accent-glow: rgba(220, 38, 38, 0.2);
   --card-bg: #ffffff;
   --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
   --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.08);
@@ -35,7 +35,7 @@
   color-scheme: light;
 }
 
-/* ---------- Dark ---------- */
+/* ---------- Dark - RED LIGHTNING EDITION ---------- */
 [data-theme="dark"] {
   --bg: #0a0a0a;
   --bg-secondary: #141414;
@@ -45,9 +45,9 @@
   --fg-muted: #525252;
   --border: #262626;
   --border-hover: #404040;
-  --accent: #a78bfa;
-  --accent-light: #c4b5fd;
-  --accent-glow: rgba(167, 139, 250, 0.15);
+  --accent: #f87171;
+  --accent-light: #fca5a5;
+  --accent-glow: rgba(248, 113, 113, 0.25);
   --card-bg: #141414;
   --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   --card-shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.4);
@@ -756,5 +756,84 @@ a {
 
   .engine-card {
     padding: 20px;
+  }
+}
+
+/* ===== RED LIGHTNING EFFECTS ===== */
+
+/* Red glow animation for high-intensity states */
+.red-lightning {
+  animation: red-pulse 2s ease-in-out infinite;
+}
+
+@keyframes red-pulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(220, 38, 38, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.8), 0 0 40px rgba(220, 38, 38, 0.4);
+  }
+}
+
+/* Red lightning border flash */
+.red-flash {
+  position: relative;
+  overflow: hidden;
+}
+
+.red-flash::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 40%,
+    rgba(220, 38, 38, 0.1) 50%,
+    transparent 60%
+  );
+  animation: lightning-sweep 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes lightning-sweep {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  20%, 100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+/* Active state red intensity */
+.engine-card:active {
+  border-color: var(--accent);
+  box-shadow: 0 0 30px rgba(220, 38, 38, 0.3);
+}
+
+/* Loading state with red lightning */
+.loading-red {
+  position: relative;
+}
+
+.loading-red::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: red-spin 2s linear infinite;
+}
+
+@keyframes red-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
