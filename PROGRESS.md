@@ -31,6 +31,8 @@ The engine functions won't work until you add these secrets:
 | **Automation & Sales** | nba-executor, create-checkout |
 
 ### Recent Updates (Latest)
+- ✅ **Monochrome Pop Design** - Grayscale by default, color pop on hover
+- ✅ **Logo Path Fix** - Changed to /Market-Lead-Engine for case-sensitive path
 - ✅ **Monochrome-to-Motion UI** - New brutalist design with grayscale buttons that animate on hover
 - ✅ **Fail-safe Engine** - Added credential check to prevent build failures when env vars missing
 - ✅ **Supabase Dependency** - Added `@supabase/supabase-js` to fix build errors

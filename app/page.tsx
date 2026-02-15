@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { processLead, checkSLA, getWeeklyReport, checkRevenueLeakage, invokeEngine } from '@/lib/engine'
 
 export default function Dashboard() {
@@ -9,7 +10,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(false)
   const [activeFunction, setActiveFunction] = useState('')
   
-  const basePath = '/market-lead-engine'
+  const basePath = '/Market-Lead-Engine'
 
   const handleProcessLead = async () => {
     if (!message) return
@@ -78,109 +79,108 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-black p-8">
-      {/* HEADER: Strictly B&W */}
-      <header className="flex justify-between items-center border-b border-black pb-6 mb-12">
-        <div className="flex items-center gap-4">
-          <div className="w-10 h-10 bg-black" />
-          <h1 className="text-xl font-bold tracking-tighter uppercase">Market Lead Engine</h1>
+    <div className="min-h-screen p-8 max-w-5xl mx-auto bg-white text-black">
+      {/* Header */}
+      <header className="flex items-center justify-between border-b-2 border-black pb-4 mb-12">
+        <div className="flex items-center gap-3">
+          <Image 
+            src={`${basePath}/logo.png`} 
+            alt="Logo" 
+            width={40} 
+            height={40}
+            className="invert"
+          />
+          <h1 className="text-2xl font-bold tracking-tighter uppercase">Market Lead Engine</h1>
         </div>
-        <div className="text-xs font-mono uppercase opacity-50">System Active // v1.0</div>
       </header>
 
-      {/* DASHBOARD GRID */}
-      <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        {/* Lead Input Section */}
-        <div className="col-span-full lg:col-span-2">
-          <textarea
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="Enter lead message (e.g., 'Hey my roof is caving in after the storm!')"
-            className="w-full h-32 p-4 border border-black rounded-none text-lg"
-          />
-        </div>
+      {/* Lead Input */}
+      <div className="mb-8">
+        <textarea
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Enter lead message (e.g., 'Hey my roof is caving in after the storm!')"
+          className="w-full h-32 p-4 border border-black text-lg"
+        />
+      </div>
 
-        {/* Process Lead Button */}
+      {/* Interactive Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <button 
           onClick={handleProcessLead}
           disabled={loading || !message}
-          className="engine-button col-span-full"
+          className="engine-card text-left"
         >
-          <span className="block text-xs mb-2 opacity-50">01 / Analysis</span>
-          <span className="text-lg font-bold">
+          <h2 className="text-xs uppercase font-mono opacity-50 mb-1">01 Analysis</h2>
+          <p className="text-xl font-bold">
             {loading && activeFunction === 'process-lead' ? 'Processing...' : 'Process New Lead'}
-          </span>
+          </p>
         </button>
-
-        {/* SLA Status */}
-        <button 
-          onClick={handleCheckSLA}
-          disabled={loading}
-          className="engine-button"
-        >
-          <span className="block text-xs mb-2 opacity-50">02 / Operations</span>
-          <span className="text-lg font-bold">
-            {loading && activeFunction === 'sla-clock' ? 'Checking...' : 'Check SLA Status'}
-          </span>
-        </button>
-
-        {/* Weekly Report */}
-        <button 
-          onClick={handleWeeklyReport}
-          disabled={loading}
-          className="engine-button"
-        >
-          <span className="block text-xs mb-2 opacity-50">03 / Reports</span>
-          <span className="text-lg font-bold">
-            {loading && activeFunction === 'generate-weekly-report' ? 'Generating...' : 'Weekly Report'}
-          </span>
-        </button>
-
-        {/* Revenue Leakage */}
+        
         <button 
           onClick={handleRevenueLeakage}
           disabled={loading}
-          className="engine-button"
+          className="engine-card text-left"
         >
-          <span className="block text-xs mb-2 opacity-50">04 / Revenue</span>
-          <span className="text-lg font-bold">
-            {loading && activeFunction === 'alert-revenue-leakage' ? 'Analyzing...' : 'Revenue Leakage'}
-          </span>
+          <h2 className="text-xs uppercase font-mono opacity-50 mb-1">02 Revenue</h2>
+          <p className="text-xl font-bold">
+            {loading && activeFunction === 'alert-revenue-leakage' ? 'Analyzing...' : 'Check Leakage'}
+          </p>
+        </button>
+
+        <button 
+          onClick={handleCheckSLA}
+          disabled={loading}
+          className="engine-card text-left"
+        >
+          <h2 className="text-xs uppercase font-mono opacity-50 mb-1">03 Operations</h2>
+          <p className="text-xl font-bold">
+            {loading && activeFunction === 'sla-clock' ? 'Checking...' : 'SLA Status'}
+          </p>
+        </button>
+
+        <button 
+          onClick={handleWeeklyReport}
+          disabled={loading}
+          className="engine-card text-left"
+        >
+          <h2 className="text-xs uppercase font-mono opacity-50 mb-1">04 Reports</h2>
+          <p className="text-xl font-bold">
+            {loading && activeFunction === 'generate-weekly-report' ? 'Generating...' : 'Weekly Report'}
+          </p>
         </button>
 
         {/* Additional Functions */}
-        {['process-lead', 'sla-clock', 'alert-revenue-leakage', 'nba-executor', 'suggest-reply', 
-          'analyze-conversation', 'generate-monthly-summary', 'qualify-ai', 'create-checkout'].map((fn) => (
+        {['nba-executor', 'suggest-reply', 'analyze-conversation', 'generate-monthly-summary', 'qualify-ai', 'create-checkout'].map((fn) => (
           <button
             key={fn}
             onClick={() => handleGenericInvoke(fn)}
             disabled={loading}
-            className="engine-button text-left"
+            className="engine-card text-left"
           >
-            <span className="block text-xs opacity-50">{fn}</span>
+            <h2 className="text-xs uppercase font-mono opacity-50">{fn}</h2>
           </button>
         ))}
+      </div>
 
-        {/* Results Display */}
-        {result && (
-          <div className={`col-span-full p-6 border ${result.error ? 'border-red-500 bg-red-50' : 'border-black bg-gray-50'}`}>
-            <h2 className="text-lg font-bold mb-4">
-              {result.error ? 'Error' : 'Result'}
-              {activeFunction && <span className="text-xs font-normal opacity-50 ml-2">({activeFunction})</span>}
-            </h2>
-            <pre className="text-sm overflow-auto bg-white p-4 border border-gray-200">
-              {JSON.stringify(result, null, 2)}
-            </pre>
-          </div>
-        )}
-      </main>
+      {/* Results */}
+      {result && (
+        <div className={`mt-8 p-6 border ${result.error ? 'border-red-500 bg-red-50' : 'border-black bg-gray-50'}`}>
+          <h2 className="text-lg font-bold mb-4">
+            {result.error ? 'Error' : 'Result'}
+            {activeFunction && <span className="text-xs font-normal opacity-50 ml-2">({activeFunction})</span>}
+          </h2>
+          <pre className="text-sm overflow-auto bg-white p-4 border border-gray-200">
+            {JSON.stringify(result, null, 2)}
+          </pre>
+        </div>
+      )}
 
       {/* Footer */}
-      <footer className="mt-16 pt-6 border-t border-black text-xs font-mono uppercase opacity-50">
+      <footer className="mt-16 pt-6 border-t-2 border-black text-xs font-mono uppercase opacity-50">
         <div className="flex justify-between">
           <span>10 Edge Functions Active</span>
           <span>Gemini 2.0 Flash</span>
-          <span>hbciotxcovzhfmsufuiw</span>
         </div>
       </footer>
     </div>
