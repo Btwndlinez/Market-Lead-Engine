@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen p-8 max-w-7xl mx-auto bg-white text-black">
-      <header className="-center border-b-flex justify-between items4 border-black pb-6 mb-12">
+      <header className="flex justify-between items-center border-b-4 border-black pb-6 mb-12">
         <div className="flex items-center gap-4">
           <Image src={`${basePath}/logo.png`} alt="Logo" width={45} height={45} className="invert" />
           <h1 className="text-3xl font-black uppercase tracking-tighter italic">Market Lead Engine</h1>
