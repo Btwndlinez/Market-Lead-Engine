@@ -102,11 +102,17 @@ a {
   background: var(--nav-bg);
   backdrop-filter: blur(var(--nav-blur));
   -webkit-backdrop-filter: blur(var(--nav-blur));
-  border: 1px solid var(--border);
+  border: 1px solid var(--accent);
   border-radius: var(--radius-pill);
   z-index: 1000;
   transition: background var(--transition-speed) ease,
-    border-color var(--transition-speed) ease;
+    border-color var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
+}
+
+.site-nav:hover {
+  border-color: var(--accent-light);
+  box-shadow: 0 0 20px var(--accent-glow), 0 0 40px rgba(220, 38, 38, 0.1);
 }
 
 .nav-logo {
