@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: 'export',
-  basePath: '/market-lead-engine',
+  basePath: '/Market-Lead-Engine',
   images: { unoptimized: true },
   typescript: {
     ignoreBuildErrors: true,

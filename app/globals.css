@@ -14,7 +14,28 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-/* Engine Buttons: B&W by default, color on hover */
+/* Grayscale by default, full color on hover */
+.interactive-card {
+  border: 1px solid black;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  filter: grayscale(100%);
+  background: white;
+  cursor: pointer;
+}
+
+.interactive-card:hover {
+  filter: grayscale(0%);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+}
+
+.interactive-card:active {
+  transform: scale(0.98);
+}
+
+/* Legacy engine-card class */
 .engine-card {
   border: 1px solid black;
   padding: 1.5rem;
@@ -27,9 +48,10 @@ body {
 .engine-card:hover {
   filter: grayscale(0%);
   border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
 }
 
 .engine-card:active {
-  transform: scale(0.95);
-  background: #f3f4f6;
+  transform: scale(0.98);
 }
