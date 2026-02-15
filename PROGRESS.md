@@ -5,10 +5,10 @@
 ### Live Website
 - **URL**: https://btwndlinez.github.io/Market-Lead-Engine/
 - **Status**: ✅ GitHub Pages deployed - **LIVE**
-- **Last Deployment**: February 14, 2026
+- **Last Deployment**: February 15, 2026
 - **Engine Functions**: ✅ Active with CORS enabled
-- **Design**: Monochrome brutalist with grayscale-to-color hover effects
-- **Cache Note**: If styles don't appear, use `?v=2` or hard refresh (Ctrl+Shift+R)
+- **Design**: Magnetly-inspired B&W with adaptive day/night mode
+- **Cache Note**: If styles don't appear, use `?v=3` or hard refresh (Ctrl+Shift+R)
 
 ### ⚠️ CRITICAL: Add GitHub Secrets Now
 The engine functions won't work until you add these secrets:
@@ -95,29 +95,49 @@ USING (true);
 | **Automation & Sales** | nba-executor, create-checkout |
 
 ### Recent Updates
+- ✅ **Magnetly-Inspired Redesign** - Clean B&W design with purple accent on hover/interaction
+- ✅ **Day/Night Adaptive Mode** - Toggle in nav, system preference detection, persists via localStorage
+- ✅ **Floating Pill Navigation** - Glassmorphism nav bar with blur effect, pill-shaped CTA buttons
+- ✅ **Hero Section** - Centered layout with stats bar (10 Edge Functions, <200ms, 99.9% SLA, AI)
+- ✅ **Engine Card Grid** - 6 cards with unique icons, animated accent borders, hover color transitions
+- ✅ **Dot-Grid Background** - Subtle texture pattern that adapts to light/dark mode
+- ✅ **Result Panel** - Slide-up animated panel for engine responses with close button
+- ✅ **Responsive Design** - Mobile-first with hidden nav links on small screens
+- ✅ **Inter Font** - Loaded from Google Fonts with proper preconnect headers
 - ✅ **Fixed Metadata Title** - Changed from "Create Next App" to "Market Lead Engine"
 - ✅ **Simplified Layout** - Removed Geist fonts, using Inter from CSS
-- ✅ **Fixed Header Layout** - Corrected mangled Tailwind class names (`-center border-b-flex` → `flex justify-between items-center`)
 - ✅ **RLS Policies** - Added comprehensive policies (service role, public read, anon insert)
 - ✅ **CORS Headers** - Added to edge functions for GitHub Pages compatibility
-- ✅ **Action Cards** - Clean monochrome design with `action-card` class
-- ✅ **Grayscale to Color** - Full color reveal on hover with brutalist shadow pop
 - ✅ **BasePath Fix** - Changed to /Market-Lead-Engine (capitalized to match repo)
-- ✅ **Monochrome Pop Design** - Grayscale by default, color pop on hover with brutalist box-shadow
-- ✅ **Monochrome-to-Motion UI** - New brutalist design with grayscale buttons that animate on hover
 - ✅ **Fail-safe Engine** - Added credential check to prevent build failures when env vars missing
 - ✅ **Supabase Dependency** - Added `@supabase/supabase-js` to fix build errors
 - ✅ **.nojekyll Fix** - Added to prevent Jekyll from ignoring `_next/` folder
 - ✅ **Engine Library** (`lib/engine.ts`) - Standardized API for all 10 edge functions
-- ✅ **Enhanced Dashboard** - Multiple action buttons (Process Lead, Check SLA, Weekly Report, Revenue Leakage)
 - ✅ **GitHub Workflow** - Added environment variables for Supabase credentials
 - ✅ **CORS Documentation** - Created docs/CORS.md for edge function configuration
-- ✅ **Progressive UI** - Better styling, loading states, and error handling
+
+### Design System
+
+#### Color Scheme
+| Mode | Background | Text | Accent (Hover) |
+|------|-----------|------|----------------|
+| **Light** | `#ffffff` | `#0a0a0a` | `#6d28d9` (purple) |
+| **Dark** | `#0a0a0a` | `#fafafa` | `#a78bfa` (light purple) |
+
+#### Key Design Patterns
+- **Navigation**: Floating pill-shaped navbar with glassmorphism (`backdrop-filter: blur`)
+- **Cards**: Rounded rectangles with thin borders, animated top-border accent on hover
+- **Buttons**: Pill-shaped (full border-radius), solid black → purple accent on hover
+- **Typography**: Inter font, -0.04em letter-spacing on headings
+- **Theme Toggle**: 48×26px toggle switch with smooth knob transition
+- **Background**: Subtle dot-grid pattern (`radial-gradient`, 24px spacing)
 
 ### File Structure
 ```
 app/
   page.tsx          # Main dashboard with all functions
+  globals.css       # Full design system with light/dark CSS variables
+  layout.tsx        # Layout with Inter font + dark mode FOUC prevention
 lib/
   engine.ts         # Standardized engine API
 .github/workflows/
@@ -142,9 +162,11 @@ docs/
 | qualify-ai | ✅ Active | Lead qualification |
 
 ### Configuration
-- **Next.js**: output: 'export', basePath: '/market-lead-engine'
+- **Next.js**: output: 'export', basePath: '/Market-Lead-Engine'
 - **AI Model**: Gemini 2.0 Flash
 - **Supabase Project**: hbciotxcovzhfmsufuiw
+- **CSS**: Tailwind v4 + custom CSS variables for theming
+- **Font**: Inter (Google Fonts)
 
 ### Setup Required
 
@@ -159,7 +181,7 @@ Access-Control-Allow-Headers: Content-Type, Authorization
 #### BasePath Handling
 ✅ Configured in `next.config.ts`:
 ```typescript
-basePath: '/market-lead-engine'
+basePath: '/Market-Lead-Engine'
 ```
 
 #### .nojekyll File
@@ -179,9 +201,10 @@ GitHub Pages uses Jekyll by default, which ignores folders starting with undersc
 ### How to Use
 
 #### Live Site
-1. Visit: https://btwndlinez.github.io/market-lead-engine/
-2. Try the different action buttons
-3. Enter lead messages and see AI analysis
+1. Visit: https://btwndlinez.github.io/Market-Lead-Engine/
+2. Toggle day/night mode with the switch in the top-right nav
+3. Try the different engine function cards
+4. View AI analysis results in the slide-up response panel
 
 #### In Code
 ```typescript
@@ -230,6 +253,11 @@ import {
 - Check workflow status: https://github.com/Btwndlinez/Market-Lead-Engine/actions
 - All dependencies are now in package.json
 
+**Dark mode not working?**
+- Theme persists in `localStorage` under key `mle-theme`
+- Falls back to system preference (`prefers-color-scheme`)
+- FOUC prevention script runs in `<head>` before page renders
+
 ### Engine Fail-Safe Implementation
 The engine now handles missing credentials gracefully:
 ```typescript
@@ -249,5 +277,5 @@ This allows the static site to build successfully even without GitHub Secrets co
 
 ---
 
-*Last Updated: 2026-02-14*
-*Commit: 2e6b2ee - Final deployment with CORS and RLS policies*
+*Last Updated: 2026-02-15*
+*Commit: Redesign — Magnetly-inspired B&W with day/night adaptive mode*
