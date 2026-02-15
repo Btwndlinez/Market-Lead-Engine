@@ -20,6 +20,25 @@ The engine functions won't work until you add these secrets:
 
 3. Re-run the workflow after adding secrets
 
+### Database Security (RLS Policies)
+
+Enable Row Level Security on tables:
+
+```sql
+-- Enable RLS for SLA Snapshots
+ALTER TABLE public.sla_snapshots ENABLE ROW LEVEL SECURITY;
+
+-- Enable RLS for Provider Settlements
+ALTER TABLE public.provider_settlements ENABLE ROW LEVEL SECURITY;
+
+-- Create policy for authenticated read access
+CREATE POLICY "Allow authenticated read access" 
+ON public.sla_snapshots 
+FOR SELECT 
+TO authenticated 
+USING (true);
+```
+
 ### 🚦 10 Deployed Functions Summary
 
 | Category | Functions |
@@ -30,8 +49,10 @@ The engine functions won't work until you add these secrets:
 | **Business Intelligence** | generate-weekly-report, generate-monthly-summary |
 | **Automation & Sales** | nba-executor, create-checkout |
 
-### Recent Updates (Latest)
+### Recent Updates
+- ✅ **CORS Headers** - Added to edge functions for GitHub Pages compatibility
 - ✅ **Action Cards** - Clean monochrome design with `action-card` class
+- ✅ **Grayscale to Color** - Full color reveal on hover with brutalist shadow pop
 - ✅ **Grayscale to Color** - Full color reveal on hover with brutalist shadow pop
 - ✅ **BasePath Fix** - Changed to /Market-Lead-Engine (capitalized to match repo)
 - ✅ **Monochrome Pop Design** - Grayscale by default, color pop on hover with brutalist box-shadow
