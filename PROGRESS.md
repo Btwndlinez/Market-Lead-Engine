@@ -95,10 +95,7 @@ USING (true);
 | **Automation & Sales** | nba-executor, create-checkout |
 
 ### Recent Updates
-- ✅ **RED LIGHTNING EDITION** - High-intensity red accent (#dc2626) replacing purple, with glow animations and lightning sweep effects
-- ✅ **Red Flash Animation** - Cards now have lightning sweep effect on hover
-- ✅ **Red Pulse Glow** - Hero badge and active states pulse with red aura
-- ✅ **Magnetly-Inspired Redesign** - Clean B&W design with red accent on hover/interaction
+- ✅ **Magnetly-Inspired Redesign** - Clean B&W design with purple accent on hover/interaction
 - ✅ **Day/Night Adaptive Mode** - Toggle in nav, system preference detection, persists via localStorage
 - ✅ **Floating Pill Navigation** - Glassmorphism nav bar with blur effect, pill-shaped CTA buttons
 - ✅ **Hero Section** - Centered layout with stats bar (10 Edge Functions, <200ms, 99.9% SLA, AI)

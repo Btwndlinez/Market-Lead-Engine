@@ -191,9 +191,9 @@ export default function Home() {
 
       {/* ── Hero ── */}
       <section className="hero" id="hero">
-        <div className="hero-badge red-lightning">
+        <div className="hero-badge">
           <div className="hero-badge-dot" />
-          ⚡ RED LIGHTNING ACTIVE
+          10 AI Functions Active
         </div>
 
         <h1>
@@ -265,7 +265,7 @@ export default function Home() {
               key={card.id}
               onClick={() => handleAction(card.action, card.id)}
               disabled={loading}
-              className={`engine-card red-flash ${loading && activeFn === card.id ? 'loading-red' : ''}`}
+              className="engine-card"
               id={`card-${card.id}`}
             >
               <div className="card-icon">{card.icon}</div>
