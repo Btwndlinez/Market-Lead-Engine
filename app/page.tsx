@@ -35,7 +35,7 @@ export default function Home() {
         <button 
           onClick={() => handleAction(() => Engine.processLead("New Lead", {source: 'dashboard'}), 'processLead')}
           disabled={loading}
-          className="action-card text-left"
+          className="engine-card text-left"
         >
           <p className="text-[10px] font-mono mb-4 opacity-50">ANALYSIS_v2.0</p>
           <h2 className="text-2xl font-bold uppercase">Process Lead</h2>
@@ -45,7 +45,7 @@ export default function Home() {
         <button 
           onClick={() => handleAction(() => Engine.qualifyLead("ID_01"), 'qualifyLead')}
           disabled={loading}
-          className="action-card text-left"
+          className="engine-card text-left"
         >
           <p className="text-[10px] font-mono mb-4 opacity-50">AI_QUALIFY</p>
           <h2 className="text-2xl font-bold uppercase">Qualify AI</h2>
@@ -55,7 +55,7 @@ export default function Home() {
         <button 
           onClick={() => handleAction(() => Engine.createCheckout([{id: 'PROD_01', name: 'Test'}]), 'createCheckout')}
           disabled={loading}
-          className="action-card text-left"
+          className="engine-card text-left"
         >
           <p className="text-[10px] font-mono mb-4 opacity-50">SALES_GATEWAY</p>
           <h2 className="text-2xl font-bold uppercase">Create Checkout</h2>
@@ -65,7 +65,7 @@ export default function Home() {
         <button 
           onClick={() => handleAction(() => Engine.checkSLA(), 'checkSLA')}
           disabled={loading}
-          className="action-card text-left"
+          className="engine-card text-left"
         >
           <p className="text-[10px] font-mono mb-4 opacity-50">OPERATIONS</p>
           <h2 className="text-2xl font-bold uppercase">SLA Status</h2>
@@ -75,7 +75,7 @@ export default function Home() {
         <button 
           onClick={() => handleAction(() => Engine.checkRevenueLeakage(), 'checkRevenueLeakage')}
           disabled={loading}
-          className="action-card text-left"
+          className="engine-card text-left"
         >
           <p className="text-[10px] font-mono mb-4 opacity-50">FINANCE</p>
           <h2 className="text-2xl font-bold uppercase">Revenue Leak</h2>
@@ -85,7 +85,7 @@ export default function Home() {
         <button 
           onClick={() => handleAction(() => Engine.getMonthlySummary(), 'getMonthlySummary')}
           disabled={loading}
-          className="action-card text-left"
+          className="engine-card text-left"
         >
           <p className="text-[10px] font-mono mb-4 opacity-50">REPORTS</p>
           <h2 className="text-2xl font-bold uppercase">Monthly Summary</h2>
