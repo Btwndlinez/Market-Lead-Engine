@@ -160,7 +160,7 @@ export default function Home() {
       {/* ── Floating Nav ── */}
       <nav className="site-nav" id="main-nav">
         <div className="nav-logo">
-          <div className="nav-logo-icon">
+          <div className="nav-logo-icon nav-logo-icon-red">
             <LogoIcon />
           </div>
           <span>MLE</span>
@@ -310,7 +310,7 @@ export default function Home() {
       <footer className="site-footer" id="footer">
         <div className="footer-inner">
           <div className="footer-brand">
-            <div className="nav-logo-icon" style={{ width: 22, height: 22 }}>
+            <div className="nav-logo-icon nav-logo-icon-red" style={{ width: 22, height: 22 }}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="11" height="11">
                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
               </svg>

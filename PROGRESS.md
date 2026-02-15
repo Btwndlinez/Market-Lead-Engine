@@ -5,7 +5,7 @@
 ### Live Website
 - **URL**: https://btwndlinez.github.io/Market-Lead-Engine/
 - **Status**: ✅ GitHub Pages deployed - **LIVE**
-- **Last Deployment**: February 15, 2026
+- **Last Deployment**: February 15, 2026 (v3 — red accent)
 - **Engine Functions**: ✅ Active with CORS enabled
 - **Design**: Magnetly-inspired B&W with adaptive day/night mode
 - **Cache Note**: If styles don't appear, use `?v=3` or hard refresh (Ctrl+Shift+R)
@@ -95,7 +95,9 @@ USING (true);
 | **Automation & Sales** | nba-executor, create-checkout |
 
 ### Recent Updates
-- ✅ **Magnetly-Inspired Redesign** - Clean B&W design with purple accent on hover/interaction
+- ✅ **Red Accent Color** - Changed hover/interaction accent from purple to red (#dc2626 light / #f87171 dark)
+- ✅ **Permanent Red Logo** - Lightning bolt icon stays red in both day and night mode
+- ✅ **Magnetly-Inspired Redesign** - Clean B&W design with red accent on hover/interaction
 - ✅ **Day/Night Adaptive Mode** - Toggle in nav, system preference detection, persists via localStorage
 - ✅ **Floating Pill Navigation** - Glassmorphism nav bar with blur effect, pill-shaped CTA buttons
 - ✅ **Hero Section** - Centered layout with stats bar (10 Edge Functions, <200ms, 99.9% SLA, AI)
@@ -121,13 +123,14 @@ USING (true);
 #### Color Scheme
 | Mode | Background | Text | Accent (Hover) |
 |------|-----------|------|----------------|
-| **Light** | `#ffffff` | `#0a0a0a` | `#6d28d9` (purple) |
-| **Dark** | `#0a0a0a` | `#fafafa` | `#a78bfa` (light purple) |
+| **Light** | `#ffffff` | `#0a0a0a` | `#dc2626` (red) |
+| **Dark** | `#0a0a0a` | `#fafafa` | `#f87171` (light red) |
 
 #### Key Design Patterns
 - **Navigation**: Floating pill-shaped navbar with glassmorphism (`backdrop-filter: blur`)
 - **Cards**: Rounded rectangles with thin borders, animated top-border accent on hover
-- **Buttons**: Pill-shaped (full border-radius), solid black → purple accent on hover
+- **Buttons**: Pill-shaped (full border-radius), solid black → red accent on hover
+- **Logo**: Lightning bolt always red (#dc2626) via `.nav-logo-icon-red`, unaffected by theme
 - **Typography**: Inter font, -0.04em letter-spacing on headings
 - **Theme Toggle**: 48×26px toggle switch with smooth knob transition
 - **Background**: Subtle dot-grid pattern (`radial-gradient`, 24px spacing)
@@ -278,4 +281,4 @@ This allows the static site to build successfully even without GitHub Secrets co
 ---
 
 *Last Updated: 2026-02-15*
-*Commit: Redesign — Magnetly-inspired B&W with day/night adaptive mode*
+*Commit: Red accent + permanent red logo lightning bolt*
