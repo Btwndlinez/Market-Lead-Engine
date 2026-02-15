@@ -94,6 +94,7 @@ USING (true);
 | **Automation & Sales** | nba-executor, create-checkout |
 
 ### Recent Updates
+- ✅ **Fixed Header Layout** - Corrected mangled Tailwind class names (`-center border-b-flex` → `flex justify-between items-center`)
 - ✅ **RLS Policies** - Added comprehensive policies (service role, public read, anon insert)
 - ✅ **CORS Headers** - Added to edge functions for GitHub Pages compatibility
 - ✅ **Action Cards** - Clean monochrome design with `action-card` class
