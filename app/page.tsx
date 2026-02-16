@@ -288,7 +288,7 @@ export default function Home() {
           <div className={`result-panel ${result.error ? 'result-error' : ''}`} id="result-panel">
             <div className="result-panel-header">
               <span className="result-panel-title">
-                {result.error ? '⛔ Error' : '✅ Engine Response'}
+                {result.error ? '⛔ Error' : '✅ Lead Qualified'}
               </span>
               <button
                 className="result-panel-close"
@@ -300,7 +300,106 @@ export default function Home() {
               </button>
             </div>
             <div className="result-panel-body">
-              <pre>{JSON.stringify(result, null, 2)}</pre>
+              {result.error ? (
+                <pre>{JSON.stringify(result, null, 2)}</pre>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  {/* AI Score */}
+                  <div style={{ 
+                    display: 'flex', 
+                    alignItems: 'baseline', 
+                    gap: '12px',
+                    padding: '16px',
+                    background: 'var(--accent-glow)',
+                    borderRadius: '12px',
+                    border: '1px solid var(--accent)'
+                  }}>
+                    <span style={{ 
+                      fontSize: '48px', 
+                      fontWeight: 800, 
+                      color: 'var(--accent)',
+                      lineHeight: 1 
+                    }}>
+                      {result.ai_score}
+                    </span>
+                    <span style={{ 
+                      fontSize: '14px', 
+                      fontWeight: 600, 
+                      color: 'var(--fg-secondary)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em'
+                    }}>
+                      AI Intent Score
+                    </span>
+                  </div>
+
+                  {/* AI Reasoning */}
+                  <div style={{ 
+                    padding: '16px', 
+                    background: 'var(--bg-secondary)',
+                    borderRadius: '12px',
+                    border: '1px solid var(--border)'
+                  }}>
+                    <p style={{ 
+                      fontSize: '11px', 
+                      fontWeight: 700, 
+                      color: 'var(--fg-muted)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.08em',
+                      marginBottom: '8px'
+                    }}>
+                      Internal Logic
+                    </p>
+                    <p style={{ 
+                      fontSize: '16px', 
+                      fontWeight: 600, 
+                      color: 'var(--fg)',
+                      lineHeight: 1.4 
+                    }}>
+                      {result.ai_reason}
+                    </p>
+                  </div>
+
+                  {/* Next Action */}
+                  <div style={{ 
+                    padding: '16px', 
+                    background: 'var(--accent)',
+                    borderRadius: '12px',
+                    color: '#fff'
+                  }}>
+                    <p style={{ 
+                      fontSize: '11px', 
+                      fontWeight: 700, 
+                      opacity: 0.7,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.08em',
+                      marginBottom: '8px'
+                    }}>
+                      Recommended Action
+                    </p>
+                    <p style={{ 
+                      fontSize: '16px', 
+                      fontWeight: 700, 
+                      lineHeight: 1.4 
+                    }}>
+                      {result.next_action}
+                    </p>
+                  </div>
+
+                  {/* Metadata */}
+                  {result.metadata && (
+                    <div style={{ 
+                      padding: '12px 16px', 
+                      background: 'var(--bg-tertiary)',
+                      borderRadius: '8px',
+                      fontSize: '12px',
+                      color: 'var(--fg-muted)'
+                    }}>
+                      <span style={{ fontWeight: 600 }}>Source:</span> {result.metadata.source}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
