@@ -108,22 +108,27 @@ TO anon
 USING (true);
 ```
 
-### 🚦 10 Deployed Functions Summary
+### 🚦 4 Deployed Functions Summary
 
-| Category | Functions |
-|----------|-----------|
-| **Lead Analysis** | process-lead (Gemini 2.0 Flash), qualify-ai |
-| **Operational Monitoring** | sla-clock, alert-revenue-leakage |
-| **Conversation & Support** | suggest-reply, analyze-conversation |
-| **Business Intelligence** | generate-weekly-report, generate-monthly-summary |
-| **Automation & Sales** | nba-executor, create-checkout |
+| Category | Functions | Status |
+|----------|-----------|--------|
+| **Lead Analysis** | process-lead (Gemini 2.0 Flash) | ✅ Active |
+| **Lead Analysis** | qualify-ai | ✅ Active |
+| **Operational Monitoring** | sla-clock | ✅ Active |
+| **Finance** | alert-revenue-leakage | ✅ Active |
+
+**Note:** 6 additional functions are defined in the API but not yet deployed to Supabase:
+- suggest-reply, analyze-conversation, generate-weekly-report, generate-monthly-summary, nba-executor, create-checkout
 
 ### Recent Updates
+- ✅ **Fixed Broken Cards** - Removed "Create Checkout" and "Monthly Summary" cards (functions not deployed)
+- ✅ **UI Updated** - Now showing 4 working cards instead of 6 broken ones
+- ✅ **Stats Updated** - Changed from "10 Functions" to "4 Functions" to match reality
 - ⚠️ **FunctionsFetchError Investigating** - Edge function connectivity issue on localhost (CORS/network)
 - ✅ **Deployment Ready** - Build committed to gh-pages branch (commit 6288283), pending authentication to push
 - ✅ **Professional Result UI** - Replaced raw JSON display with formatted cards showing AI Score (75), Reasoning, and Next Action
 - ✅ **Environment Variables Fixed** - Created `.env.local` with Supabase credentials for local development
-- ⚠️ **Engine Functions** - UI implemented, edge function connectivity needs troubleshooting
+- ⚠️ **Engine Functions** - UI implemented, 4 functions ready, edge function connectivity needs troubleshooting
 - ✅ **Codebase Reset** - Reverted to working commit 7f09315 after opencode corruption
 - ✅ **Local Dev Fixed** - Layout now displays correctly at http://localhost:3000
 - ✅ **basePath Config** - Temporarily removed for local testing (restore for production: `basePath: '/Market-Lead-Engine'`)
@@ -132,8 +137,8 @@ USING (true);
 - ✅ **Magnetly-Inspired Redesign** - Clean B&W design with red accent on hover/interaction
 - ✅ **Day/Night Adaptive Mode** - Toggle in nav, system preference detection, persists via localStorage
 - ✅ **Floating Pill Navigation** - Glassmorphism nav bar with blur effect, pill-shaped CTA buttons
-- ✅ **Hero Section** - Centered layout with stats bar (10 Edge Functions, <200ms, 99.9% SLA, AI)
-- ✅ **Engine Card Grid** - 6 cards with unique icons, animated accent borders, hover color transitions
+- ✅ **Hero Section** - Centered layout with stats bar (4 Edge Functions, <200ms, 99.9% SLA, AI)
+- ✅ **Engine Card Grid** - 4 cards with unique icons, animated accent borders, hover color transitions (2 removed - functions not deployed)
 - ✅ **Dot-Grid Background** - Subtle texture pattern that adapts to light/dark mode
 - ✅ **Result Panel** - Professional card-based display showing AI Score, Reasoning, and Next Action (not raw JSON)
 - ✅ **Responsive Design** - Mobile-first with hidden nav links on small screens
@@ -146,7 +151,7 @@ USING (true);
 - ✅ **Fail-safe Engine** - Added credential check to prevent build failures when env vars missing
 - ✅ **Supabase Dependency** - Added `@supabase/supabase-js` to fix build errors
 - ✅ **.nojekyll Fix** - Added to prevent Jekyll from ignoring `_next/` folder
-- ✅ **Engine Library** (`lib/engine.ts`) - Standardized API for all 10 edge functions
+- ✅ **Engine Library** (`lib/engine.ts`) - Standardized API for 4 deployed + 6 planned edge functions
 - ✅ **GitHub Workflow** - Added environment variables for Supabase credentials
 - ✅ **CORS Documentation** - Created docs/CORS.md for edge function configuration
 

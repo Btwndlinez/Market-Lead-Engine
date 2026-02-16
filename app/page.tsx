@@ -31,13 +31,6 @@ const TargetIcon = () => (
   </svg>
 )
 
-const CartIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
-    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-  </svg>
-)
-
 const ClockIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
@@ -48,12 +41,6 @@ const AlertIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
     <line x1="12" y1="9" x2="12" y2="13" /><line x1="12" y1="17" x2="12.01" y2="17" />
-  </svg>
-)
-
-const BarChartIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="12" y1="20" x2="12" y2="10" /><line x1="18" y1="20" x2="18" y2="4" /><line x1="6" y1="20" x2="6" y2="16" />
   </svg>
 )
 
@@ -88,14 +75,6 @@ const cards = [
     action: () => Engine.qualifyLead("ID_01"),
   },
   {
-    id: 'createCheckout',
-    label: 'SALES',
-    title: 'Create Checkout',
-    desc: 'Generate payment sessions and checkout flows for qualified leads.',
-    icon: <CartIcon />,
-    action: () => Engine.createCheckout([{ id: 'PROD_01', name: 'Test' }]),
-  },
-  {
     id: 'checkSLA',
     label: 'OPERATIONS',
     title: 'SLA Status',
@@ -110,14 +89,6 @@ const cards = [
     desc: 'Detect high-value leads that may be at risk of revenue leakage.',
     icon: <AlertIcon />,
     action: () => Engine.checkRevenueLeakage(),
-  },
-  {
-    id: 'getMonthlySummary',
-    label: 'REPORTS',
-    title: 'Monthly Summary',
-    desc: 'Comprehensive monthly analytics and performance reports at a glance.',
-    icon: <BarChartIcon />,
-    action: () => Engine.getMonthlySummary(),
   },
 ]
 
@@ -193,7 +164,7 @@ export default function Home() {
       <section className="hero" id="hero">
         <div className="hero-badge">
           <div className="hero-badge-dot" />
-          10 AI Functions Active
+          4 AI Functions Active
         </div>
 
         <h1>
@@ -201,7 +172,7 @@ export default function Home() {
         </h1>
 
         <p className="hero-sub">
-          Process, qualify, and convert leads with ten intelligent edge functions.
+          Process, qualify, and convert leads with four intelligent edge functions.
           Real-time SLA monitoring, revenue leak detection, and AI-driven insights — all in one engine.
         </p>
 
@@ -232,7 +203,7 @@ export default function Home() {
       <div className="section" id="engine">
         <div className="stats-bar">
           <div className="stat-item">
-            <div className="stat-value">10</div>
+            <div className="stat-value">4</div>
             <div className="stat-label">Edge Functions</div>
           </div>
           <div className="stat-item">
@@ -255,8 +226,8 @@ export default function Home() {
         <div className="section-label">• Engine Functions</div>
         <h2 className="section-title">Everything you need to process leads</h2>
         <p className="section-desc">
-          Six core functions covering the full lead lifecycle — from AI analysis
-          to checkout. Each runs as a Supabase Edge Function with CORS enabled.
+          Four core functions covering the full lead lifecycle — from AI analysis
+          to revenue monitoring. Each runs as a Supabase Edge Function with CORS enabled.
         </p>
 
         <div className="card-grid">
