@@ -100,6 +100,8 @@ USING (true);
 | **Automation & Sales** | nba-executor, create-checkout |
 
 ### Recent Updates
+- ✅ **Environment Variables Fixed** - Created `.env.local` with Supabase credentials for local development
+- ✅ **Engine Functions Working** - All 10 edge functions now callable from localhost
 - ✅ **Codebase Reset** - Reverted to working commit 7f09315 after opencode corruption
 - ✅ **Local Dev Fixed** - Layout now displays correctly at http://localhost:3000
 - ✅ **basePath Config** - Temporarily removed for local testing (restore for production: `basePath: '/Market-Lead-Engine'`)
@@ -178,6 +180,31 @@ docs/
 - **Supabase Project**: hbciotxcovzhfmsufuiw
 - **CSS**: Tailwind v4 + custom CSS variables for theming
 - **Font**: Inter (Google Fonts)
+
+### Local Development Setup
+
+#### Environment Variables
+For local development, create `.env.local` in the project root:
+```bash
+NEXT_PUBLIC_SUPABASE_URL=https://hbciotxcovzhfmsufuiw.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_Zg9f8x7vslLxsjOZ69ogxw_e0KkN-RJ
+```
+
+**Important**: Restart the dev server after creating `.env.local`:
+```bash
+npm run dev
+```
+
+#### Testing Engine Functions
+All 6 cards on the homepage are now functional:
+- **Process Lead** - AI analysis with scoring
+- **Qualify AI** - Lead qualification
+- **Create Checkout** - Payment session generation
+- **SLA Status** - Breach monitoring
+- **Revenue Leak** - High-value lead detection
+- **Monthly Summary** - Analytics reports
+
+Click any card to trigger the corresponding Supabase Edge Function.
 
 ### Setup Required
 
@@ -300,5 +327,5 @@ This allows the static site to build successfully even without GitHub Secrets co
 ---
 
 *Last Updated: 2026-02-16*
-*Commit: Codebase reset to 7f09315 - Local development working*
-*Status: Layout displaying correctly, ready for further development*
+*Commit: Environment variables configured - Engine functions working locally*
+*Status: All 10 edge functions callable from localhost, layout displaying correctly*
