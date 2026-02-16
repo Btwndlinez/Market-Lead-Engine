@@ -95,6 +95,8 @@ USING (true);
 | **Automation & Sales** | nba-executor, create-checkout |
 
 ### Recent Updates
+- ✅ **Semantic SEO Hub Page** - `/commercial-lead-generation` targeting "Commercial Lead Generation" keyword
+- ✅ **SEO Content Strategy** - Encyclopedic depth, revenue leakage explanation, specialized B2B segments, FAQ section
 - ✅ **Red Accent Color** - Changed hover/interaction accent from purple to red (#dc2626 light / #f87171 dark)
 - ✅ **Permanent Red Logo** - Lightning bolt is now a **SOLID** red icon inside an **INVERSE** colored box (Black in Light Mode, White in Dark Mode)
 - ✅ **Magnetly-Inspired Redesign** - Clean B&W design with red accent on hover/interaction
@@ -138,11 +140,13 @@ USING (true);
 ### File Structure
 ```
 app/
-  page.tsx          # Main dashboard with all functions
-  globals.css       # Full design system with light/dark CSS variables
-  layout.tsx        # Layout with Inter font + dark mode FOUC prevention
+  page.tsx                              # Main dashboard with all functions
+  globals.css                           # Full design system with light/dark CSS variables
+  layout.tsx                            # Layout with Inter font + dark mode FOUC prevention
+  commercial-lead-generation/
+    page.tsx                            # Semantic SEO hub page (Commercial Lead Generation)
 lib/
-  engine.ts         # Standardized engine API
+  engine.ts                             # Standardized engine API
 .github/workflows/
   deploy.yml        # GitHub Pages deployment
 docs/
@@ -200,6 +204,14 @@ GitHub Pages uses Jekyll by default, which ignores folders starting with undersc
 ✅ Must be set to "GitHub Actions" not "Deploy from a branch"
 - Go to: https://github.com/Btwndlinez/Market-Lead-Engine/settings/pages
 - Source: Select **GitHub Actions**
+
+#### Semantic SEO Strategy
+✅ **Hub Page Architecture**: `/commercial-lead-generation` serves as a topical authority page
+- **H1**: "Professional Commercial Lead Generation & Revenue Analysis" (primary keyword)
+- **H2 Sections**: Revenue Leakage, Specialized Segments (High-Ticket, Industrial, Enterprise SaaS), FAQ
+- **Topical Depth**: Encyclopedic content explaining service nuances without keyword stuffing
+- **User Intent**: Targets CEOs and Sales Directors with professional "Magnetly.co" aesthetic
+- **Internal Linking**: Connects back to main engine dashboard to strengthen authority
 
 ### How to Use
 
