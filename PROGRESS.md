@@ -1,13 +1,18 @@
 # Market Lead Engine - Progress Report
 
-## Current Status: Website Live with Full UI ✅
+## Current Status: Local Development Working ✅
+
+### Local Development
+- **Status**: ✅ Layout displaying correctly at http://localhost:3000
+- **Working Commit**: 7f09315 (v4 — solid red bolt + inverse box)
+- **Engine Functions**: ✅ Code restored and functional
+- **Design**: Magnetly-inspired B&W with adaptive day/night mode
 
 ### Live Website
 - **URL**: https://btwndlinez.github.io/Market-Lead-Engine/
-- **Status**: ✅ GitHub Pages deployed - **LIVE**
-- **Last Deployment**: February 15, 2026 (v4 — solid red bolt + inverse box)
-- **Engine Functions**: ✅ Active with CORS enabled
-- **Design**: Magnetly-inspired B&W with adaptive day/night mode
+- **Status**: ⚠️ Codebase reset to working state, deployment pending
+- **Last Working Deployment**: February 15, 2026 (v4)
+- **Note**: GitHub Actions workflow temporarily unavailable due to permission scope
 - **Cache Note**: If styles don't appear, use `?v=3` or hard refresh (Ctrl+Shift+R)
 
 ### ⚠️ CRITICAL: Add GitHub Secrets Now
@@ -95,6 +100,9 @@ USING (true);
 | **Automation & Sales** | nba-executor, create-checkout |
 
 ### Recent Updates
+- ✅ **Codebase Reset** - Reverted to working commit 7f09315 after opencode corruption
+- ✅ **Local Dev Fixed** - Layout now displays correctly at http://localhost:3000
+- ✅ **basePath Config** - Temporarily removed for local testing (restore for production: `basePath: '/Market-Lead-Engine'`)
 - ✅ **Red Accent Color** - Changed hover/interaction accent from purple to red (#dc2626 light / #f87171 dark)
 - ✅ **Permanent Red Logo** - Lightning bolt is now a **SOLID** red icon inside an **INVERSE** colored box (Black in Light Mode, White in Dark Mode)
 - ✅ **Magnetly-Inspired Redesign** - Clean B&W design with red accent on hover/interaction
@@ -182,10 +190,21 @@ Access-Control-Allow-Headers: Content-Type, Authorization
 ```
 
 #### BasePath Handling
-✅ Configured in `next.config.ts`:
+
+**For Local Development:**
+```typescript
+// Temporarily remove basePath for localhost testing
+basePath: ''
+```
+Access at: http://localhost:3000
+
+**For Production (GitHub Pages):**
 ```typescript
 basePath: '/Market-Lead-Engine'
 ```
+Access at: https://btwndlinez.github.io/Market-Lead-Engine/
+
+⚠️ **Important**: Remember to restore `basePath: '/Market-Lead-Engine'` before deploying to production!
 
 #### .nojekyll File
 GitHub Pages uses Jekyll by default, which ignores folders starting with underscore (`_`). Next.js puts files in `_next/` folder.
@@ -280,5 +299,6 @@ This allows the static site to build successfully even without GitHub Secrets co
 
 ---
 
-*Last Updated: 2026-02-15*
-*Commit: Solid red bolt + inverse logo box*
+*Last Updated: 2026-02-16*
+*Commit: Codebase reset to 7f09315 - Local development working*
+*Status: Layout displaying correctly, ready for further development*
