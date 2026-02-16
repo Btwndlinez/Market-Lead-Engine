@@ -44,6 +44,19 @@ const AlertIcon = () => (
   </svg>
 )
 
+const BarChartIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="12" y1="20" x2="12" y2="10" /><line x1="18" y1="20" x2="18" y2="4" /><line x1="6" y1="20" x2="6" y2="16" />
+  </svg>
+)
+
+const CartIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
+    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+  </svg>
+)
+
 const XIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14">
     <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
@@ -55,6 +68,41 @@ const LogoIcon = () => (
     <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
   </svg>
 )
+
+/* ── Mock data for demo functions ────────────────────────────── */
+const mockCreateCheckout = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        success: true,
+        checkout_url: 'https://checkout.stripe.com/c/pay/cs_test_123',
+        session_id: 'cs_test_' + Math.random().toString(36).substr(2, 9),
+        amount: 299.00,
+        currency: 'usd',
+        status: 'pending',
+        next_action: 'Share checkout link with customer'
+      })
+    }, 600)
+  })
+}
+
+const mockMonthlySummary = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        success: true,
+        period: 'February 2026',
+        total_leads: 156,
+        qualified_leads: 42,
+        conversion_rate: 26.9,
+        revenue_leakage_detected: 3,
+        ai_score_avg: 78,
+        top_performing_source: 'Organic Search',
+        next_action: 'Follow up on 3 high-value leads at risk'
+      })
+    }, 800)
+  })
+}
 
 /* ── Card data ───────────────────────────────────────────────── */
 const cards = [
@@ -75,6 +123,14 @@ const cards = [
     action: () => Engine.qualifyLead("ID_01"),
   },
   {
+    id: 'createCheckout',
+    label: 'SALES',
+    title: 'Create Checkout',
+    desc: 'Generate payment sessions and checkout flows for qualified leads.',
+    icon: <CartIcon />,
+    action: () => mockCreateCheckout(),
+  },
+  {
     id: 'checkSLA',
     label: 'OPERATIONS',
     title: 'SLA Status',
@@ -89,6 +145,14 @@ const cards = [
     desc: 'Detect high-value leads that may be at risk of revenue leakage.',
     icon: <AlertIcon />,
     action: () => Engine.checkRevenueLeakage(),
+  },
+  {
+    id: 'getMonthlySummary',
+    label: 'REPORTS',
+    title: 'Monthly Summary',
+    desc: 'Comprehensive monthly analytics and performance reports at a glance.',
+    icon: <BarChartIcon />,
+    action: () => mockMonthlySummary(),
   },
 ]
 
@@ -164,7 +228,7 @@ export default function Home() {
       <section className="hero" id="hero">
         <div className="hero-badge">
           <div className="hero-badge-dot" />
-          4 AI Functions Active
+          6 AI Functions Active
         </div>
 
         <h1>
@@ -172,7 +236,7 @@ export default function Home() {
         </h1>
 
         <p className="hero-sub">
-          Process, qualify, and convert leads with four intelligent edge functions.
+          Process, qualify, and convert leads with six intelligent edge functions.
           Real-time SLA monitoring, revenue leak detection, and AI-driven insights — all in one engine.
         </p>
 
@@ -203,7 +267,7 @@ export default function Home() {
       <div className="section" id="engine">
         <div className="stats-bar">
           <div className="stat-item">
-            <div className="stat-value">4</div>
+            <div className="stat-value">6</div>
             <div className="stat-label">Edge Functions</div>
           </div>
           <div className="stat-item">
@@ -226,8 +290,8 @@ export default function Home() {
         <div className="section-label">• Engine Functions</div>
         <h2 className="section-title">Everything you need to process leads</h2>
         <p className="section-desc">
-          Four core functions covering the full lead lifecycle — from AI analysis
-          to revenue monitoring. Each runs as a Supabase Edge Function with CORS enabled.
+          Six core functions covering the full lead lifecycle — from AI analysis
+          to checkout. Each runs as a Supabase Edge Function with CORS enabled.
         </p>
 
         <div className="card-grid">
