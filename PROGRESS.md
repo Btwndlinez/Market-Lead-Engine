@@ -1,18 +1,37 @@
 # Market Lead Engine - Progress Report
 
-## Current Status: Local Development Working ✅
+## Current Status: Local Development Working ⚠️
 
 ### Local Development
 - **Status**: ✅ Layout displaying correctly at http://localhost:3000
-- **Working Commit**: 7f09315 (v4 — solid red bolt + inverse box)
-- **Engine Functions**: ✅ Code restored and functional
+- **Working Commit**: b5632e8 (Professional result UI deployed)
+- **Engine Functions**: ⚠️ UI working, but FunctionsFetchError on localhost (CORS/network issue)
 - **Design**: Magnetly-inspired B&W with adaptive day/night mode
+- **Issue**: Edge function connectivity - `FunctionsFetchError: Failed to send request`
+
+### Troubleshooting: FunctionsFetchError
+If you see this error when clicking cards:
+```
+FunctionsFetchError: Failed to send a request to the Edge Function
+```
+
+**Possible causes:**
+1. **CORS not enabled** on the Supabase edge function
+2. **Function not deployed** to Supabase
+3. **Network/firewall** blocking the request
+4. **Localhost restrictions** - some browsers block cross-origin requests from localhost
+
+**Solutions:**
+1. Check function is deployed: https://supabase.com/dashboard/project/hbciotxcovzhfmsufuiw/functions
+2. Redeploy with CORS headers (see docs/CORS.md)
+3. Try accessing via `http://127.0.0.1:3000` instead of `http://localhost:3000`
+4. For testing, use the mock data fallback (already in place)
 
 ### Live Website
 - **URL**: https://btwndlinez.github.io/Market-Lead-Engine/
-- **Status**: ⚠️ Codebase reset to working state, deployment pending
-- **Last Working Deployment**: February 15, 2026 (v4)
-- **Note**: GitHub Actions workflow temporarily unavailable due to permission scope
+- **Status**: ⚠️ Deployment files committed to gh-pages, push pending authentication
+- **Local Deployment**: ✅ Ready (commit 6288283 on gh-pages branch)
+- **Note**: Git push requires authentication with workflow scope
 - **Cache Note**: If styles don't appear, use `?v=3` or hard refresh (Ctrl+Shift+R)
 
 ### ⚠️ CRITICAL: Add GitHub Secrets Now
@@ -100,9 +119,11 @@ USING (true);
 | **Automation & Sales** | nba-executor, create-checkout |
 
 ### Recent Updates
+- ⚠️ **FunctionsFetchError Investigating** - Edge function connectivity issue on localhost (CORS/network)
+- ✅ **Deployment Ready** - Build committed to gh-pages branch (commit 6288283), pending authentication to push
 - ✅ **Professional Result UI** - Replaced raw JSON display with formatted cards showing AI Score (75), Reasoning, and Next Action
 - ✅ **Environment Variables Fixed** - Created `.env.local` with Supabase credentials for local development
-- ✅ **Engine Functions Working** - All 10 edge functions now callable from localhost
+- ⚠️ **Engine Functions** - UI implemented, edge function connectivity needs troubleshooting
 - ✅ **Codebase Reset** - Reverted to working commit 7f09315 after opencode corruption
 - ✅ **Local Dev Fixed** - Layout now displays correctly at http://localhost:3000
 - ✅ **basePath Config** - Temporarily removed for local testing (restore for production: `basePath: '/Market-Lead-Engine'`)
@@ -328,5 +349,6 @@ This allows the static site to build successfully even without GitHub Secrets co
 ---
 
 *Last Updated: 2026-02-16*
-*Commit: Environment variables configured - Engine functions working locally*
-*Status: All 10 edge functions callable from localhost, layout displaying correctly*
+*Commit: b5632e8 - Professional result UI, deployment ready*
+*Status: Layout working ✅, Deployment committed ✅, FunctionsFetchError ⚠️ (edge function connectivity issue)*
+*Next Steps: Fix edge function CORS or use mock data for demo*
