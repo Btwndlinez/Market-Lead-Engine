@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import "./globals.css";
+import "../globals.css";
 
 export const metadata: Metadata = {
   title: "Commercial Lead Generation & Revenue Analysis | Market Lead Engine",
@@ -22,8 +21,8 @@ export default function CommercialLeadGenPage() {
           <span>MLE</span>
         </div>
         <div className="nav-links">
-          <Link href="/" className="nav-link">Engine</Link>
-          <Link href="/commercial-lead-generation" className="nav-link">Commercial</Link>
+          <a href="/" className="nav-link">Engine</a>
+          <a href="/commercial-lead-generation" className="nav-link">Commercial</a>
           <a href="https://github.com/Btwndlinez/Market-Lead-Engine" target="_blank" rel="noopener" className="nav-link">GitHub</a>
         </div>
         <div className="nav-actions">
@@ -49,7 +48,7 @@ export default function CommercialLeadGenPage() {
         </p>
         
         <div className="hero-cta">
-          <Link href="/#engine" className="btn btn-primary">Launch Lead Engine</Link>
+          <a href="/#engine" className="btn btn-primary">Launch Lead Engine</a>
           <a href="#segments" className="btn btn-secondary">Explore Segments</a>
         </div>
       </section>
@@ -244,7 +243,7 @@ export default function CommercialLeadGenPage() {
           accelerate qualified pipeline velocity.
         </p>
         <div className="hero-cta" style={{ justifyContent: "center" }}>
-          <Link href="/" className="btn btn-primary">Launch Lead Engine</Link>
+          <a href="/" className="btn btn-primary">Launch Lead Engine</a>
           <a href="mailto:contact@marketleadengine.com" className="btn btn-secondary">
             Contact Sales
           </a>
@@ -263,8 +262,8 @@ export default function CommercialLeadGenPage() {
             <span>Market Lead Engine</span>
           </div>
           <div className="footer-links">
-            <Link href="/" className="footer-link">Dashboard</Link>
-            <Link href="/commercial-lead-generation" className="footer-link">Commercial</Link>
+            <a href="/" className="footer-link">Dashboard</a>
+            <a href="/commercial-lead-generation" className="footer-link">Commercial</a>
             <a href="https://github.com/Btwndlinez/Market-Lead-Engine" target="_blank" rel="noopener" className="footer-link">GitHub</a>
           </div>
           <div style={{ fontSize: "0.8rem", color: "var(--fg-muted)" }}>
