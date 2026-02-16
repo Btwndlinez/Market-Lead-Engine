@@ -339,99 +339,293 @@ export default function Home() {
                 <pre>{JSON.stringify(result, null, 2)}</pre>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                  {/* AI Score */}
-                  <div style={{ 
-                    display: 'flex', 
-                    alignItems: 'baseline', 
-                    gap: '12px',
-                    padding: '16px',
-                    background: 'var(--accent-glow)',
-                    borderRadius: '12px',
-                    border: '1px solid var(--accent)'
-                  }}>
-                    <span style={{ 
-                      fontSize: '48px', 
-                      fontWeight: 800, 
-                      color: 'var(--accent)',
-                      lineHeight: 1 
-                    }}>
-                      {result.ai_score}
-                    </span>
-                    <span style={{ 
-                      fontSize: '14px', 
-                      fontWeight: 600, 
-                      color: 'var(--fg-secondary)',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em'
-                    }}>
-                      AI Intent Score
-                    </span>
-                  </div>
+                  {/* Process Lead / Qualify AI Format */}
+                  {result.ai_score !== undefined && (
+                    <>
+                      <div style={{ 
+                        display: 'flex', 
+                        alignItems: 'baseline', 
+                        gap: '12px',
+                        padding: '16px',
+                        background: 'var(--accent-glow)',
+                        borderRadius: '12px',
+                        border: '1px solid var(--accent)'
+                      }}>
+                        <span style={{ 
+                          fontSize: '48px', 
+                          fontWeight: 800, 
+                          color: 'var(--accent)',
+                          lineHeight: 1 
+                        }}>
+                          {result.ai_score}
+                        </span>
+                        <span style={{ 
+                          fontSize: '14px', 
+                          fontWeight: 600, 
+                          color: 'var(--fg-secondary)',
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.05em'
+                        }}>
+                          AI Intent Score
+                        </span>
+                      </div>
 
-                  {/* AI Reasoning */}
-                  <div style={{ 
-                    padding: '16px', 
-                    background: 'var(--bg-secondary)',
-                    borderRadius: '12px',
-                    border: '1px solid var(--border)'
-                  }}>
-                    <p style={{ 
-                      fontSize: '11px', 
-                      fontWeight: 700, 
-                      color: 'var(--fg-muted)',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.08em',
-                      marginBottom: '8px'
-                    }}>
-                      Internal Logic
-                    </p>
-                    <p style={{ 
-                      fontSize: '16px', 
-                      fontWeight: 600, 
-                      color: 'var(--fg)',
-                      lineHeight: 1.4 
-                    }}>
-                      {result.ai_reason}
-                    </p>
-                  </div>
+                      {result.ai_reason && (
+                        <div style={{ 
+                          padding: '16px', 
+                          background: 'var(--bg-secondary)',
+                          borderRadius: '12px',
+                          border: '1px solid var(--border)'
+                        }}>
+                          <p style={{ 
+                            fontSize: '11px', 
+                            fontWeight: 700, 
+                            color: 'var(--fg-muted)',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.08em',
+                            marginBottom: '8px'
+                          }}>
+                            Internal Logic
+                          </p>
+                          <p style={{ 
+                            fontSize: '16px', 
+                            fontWeight: 600, 
+                            color: 'var(--fg)',
+                            lineHeight: 1.4 
+                          }}>
+                            {result.ai_reason}
+                          </p>
+                        </div>
+                      )}
 
-                  {/* Next Action */}
-                  <div style={{ 
-                    padding: '16px', 
-                    background: 'var(--accent)',
-                    borderRadius: '12px',
-                    color: '#fff'
-                  }}>
-                    <p style={{ 
-                      fontSize: '11px', 
-                      fontWeight: 700, 
-                      opacity: 0.7,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.08em',
-                      marginBottom: '8px'
-                    }}>
-                      Recommended Action
-                    </p>
-                    <p style={{ 
-                      fontSize: '16px', 
-                      fontWeight: 700, 
-                      lineHeight: 1.4 
-                    }}>
-                      {result.next_action}
-                    </p>
-                  </div>
+                      {result.next_action && (
+                        <div style={{ 
+                          padding: '16px', 
+                          background: 'var(--accent)',
+                          borderRadius: '12px',
+                          color: '#fff'
+                        }}>
+                          <p style={{ 
+                            fontSize: '11px', 
+                            fontWeight: 700, 
+                            opacity: 0.7,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.08em',
+                            marginBottom: '8px'
+                          }}>
+                            Recommended Action
+                          </p>
+                          <p style={{ 
+                            fontSize: '16px', 
+                            fontWeight: 700, 
+                            lineHeight: 1.4 
+                          }}>
+                            {result.next_action}
+                          </p>
+                        </div>
+                      )}
+                    </>
+                  )}
 
-                  {/* Metadata */}
-                  {result.metadata && (
-                    <div style={{ 
-                      padding: '12px 16px', 
-                      background: 'var(--bg-tertiary)',
-                      borderRadius: '8px',
-                      fontSize: '12px',
-                      color: 'var(--fg-muted)'
+                  {/* Revenue Leak Format */}
+                  {result.leakage_detected !== undefined && (
+                    <>
+                      <div style={{ 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        gap: '12px',
+                        padding: '16px',
+                        background: result.leakage_detected > 0 ? 'var(--accent-glow)' : 'var(--bg-secondary)',
+                        borderRadius: '12px',
+                        border: `1px solid ${result.leakage_detected > 0 ? 'var(--accent)' : 'var(--border)'}`
+                      }}>
+                        <span style={{ 
+                          fontSize: '36px', 
+                          fontWeight: 800, 
+                          color: result.leakage_detected > 0 ? 'var(--accent)' : 'var(--fg-secondary)',
+                          lineHeight: 1 
+                        }}>
+                          {result.leakage_detected}
+                        </span>
+                        <span style={{ 
+                          fontSize: '14px', 
+                          fontWeight: 600, 
+                          color: 'var(--fg-secondary)',
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.05em'
+                        }}>
+                          Leakage Detected
+                        </span>
+                      </div>
+
+                      <div style={{ 
+                        padding: '16px', 
+                        background: 'var(--bg-secondary)',
+                        borderRadius: '12px',
+                        border: '1px solid var(--border)'
+                      }}>
+                        <p style={{ 
+                          fontSize: '11px', 
+                          fontWeight: 700, 
+                          color: 'var(--fg-muted)',
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.08em',
+                          marginBottom: '8px'
+                        }}>
+                          High Value Leads
+                        </p>
+                        {result.high_value_leads && result.high_value_leads.length > 0 ? (
+                          <ul style={{ margin: 0, paddingLeft: '20px' }}>
+                            {result.high_value_leads.map((lead: any, idx: number) => (
+                              <li key={idx} style={{ fontSize: '14px', marginBottom: '4px' }}>
+                                {lead.id || lead.name || JSON.stringify(lead)}
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <p style={{ fontSize: '14px', color: 'var(--fg-muted)' }}>
+                            No high-value leads at risk
+                          </p>
+                        )}
+                      </div>
+                    </>
+                  )}
+
+                  {/* Checkout Format */}
+                  {result.checkout_url && (
+                    <>
+                      <div style={{ 
+                        padding: '16px', 
+                        background: 'var(--accent)',
+                        borderRadius: '12px',
+                        color: '#fff'
+                      }}>
+                        <p style={{ 
+                          fontSize: '11px', 
+                          fontWeight: 700, 
+                          opacity: 0.7,
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.08em',
+                          marginBottom: '8px'
+                        }}>
+                          Checkout Session
+                        </p>
+                        <p style={{ 
+                          fontSize: '24px', 
+                          fontWeight: 700, 
+                          lineHeight: 1.2,
+                          marginBottom: '8px'
+                        }}>
+                          ${result.amount?.toFixed(2) || '0.00'} {result.currency?.toUpperCase() || 'USD'}
+                        </p>
+                        <p style={{ fontSize: '12px', opacity: 0.8 }}>
+                          Status: {result.status}
+                        </p>
+                      </div>
+
+                      <div style={{ 
+                        padding: '16px', 
+                        background: 'var(--bg-secondary)',
+                        borderRadius: '12px',
+                        border: '1px solid var(--border)'
+                      }}>
+                        <p style={{ 
+                          fontSize: '11px', 
+                          fontWeight: 700, 
+                          color: 'var(--fg-muted)',
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.08em',
+                          marginBottom: '8px'
+                        }}>
+                          Next Action
+                        </p>
+                        <p style={{ fontSize: '14px' }}>{result.next_action}</p>
+                      </div>
+                    </>
+                  )}
+
+                  {/* Monthly Summary Format */}
+                  {result.period && (
+                    <>
+                      <div style={{ 
+                        padding: '16px', 
+                        background: 'var(--accent)',
+                        borderRadius: '12px',
+                        color: '#fff'
+                      }}>
+                        <p style={{ 
+                          fontSize: '11px', 
+                          fontWeight: 700, 
+                          opacity: 0.7,
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.08em',
+                          marginBottom: '8px'
+                        }}>
+                          {result.period}
+                        </p>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                          <div>
+                            <p style={{ fontSize: '24px', fontWeight: 700 }}>{result.total_leads}</p>
+                            <p style={{ fontSize: '11px', opacity: 0.7 }}>Total Leads</p>
+                          </div>
+                          <div>
+                            <p style={{ fontSize: '24px', fontWeight: 700 }}>{result.qualified_leads}</p>
+                            <p style={{ fontSize: '11px', opacity: 0.7 }}>Qualified</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div style={{ 
+                        padding: '16px', 
+                        background: 'var(--bg-secondary)',
+                        borderRadius: '12px',
+                        border: '1px solid var(--border)'
+                      }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                          <div>
+                            <p style={{ fontSize: '11px', fontWeight: 700, color: 'var(--fg-muted)', textTransform: 'uppercase' }}>Conversion Rate</p>
+                            <p style={{ fontSize: '18px', fontWeight: 600 }}>{result.conversion_rate}%</p>
+                          </div>
+                          <div>
+                            <p style={{ fontSize: '11px', fontWeight: 700, color: 'var(--fg-muted)', textTransform: 'uppercase' }}>Avg AI Score</p>
+                            <p style={{ fontSize: '18px', fontWeight: 600 }}>{result.ai_score_avg}</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {result.next_action && (
+                        <div style={{ 
+                          padding: '16px', 
+                          background: 'var(--accent-glow)',
+                          borderRadius: '12px',
+                          border: '1px solid var(--accent)'
+                        }}>
+                          <p style={{ 
+                            fontSize: '11px', 
+                            fontWeight: 700, 
+                            color: 'var(--accent)',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.08em',
+                            marginBottom: '8px'
+                          }}>
+                            Recommended Action
+                          </p>
+                          <p style={{ fontSize: '14px', fontWeight: 600 }}>{result.next_action}</p>
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {/* Generic - show raw JSON for unrecognized formats */}
+                  {!result.ai_score && result.leakage_detected === undefined && !result.checkout_url && !result.period && (
+                    <pre style={{ 
+                      background: 'var(--bg-secondary)', 
+                      padding: '16px', 
+                      borderRadius: '12px',
+                      overflow: 'auto'
                     }}>
-                      <span style={{ fontWeight: 600 }}>Source:</span> {result.metadata.source}
-                    </div>
+                      {JSON.stringify(result, null, 2)}
+                    </pre>
                   )}
                 </div>
               )}
