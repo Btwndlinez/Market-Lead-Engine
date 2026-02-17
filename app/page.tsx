@@ -426,7 +426,69 @@ export default function Home() {
                       );
                     }
 
-                    // 3. Fallback: Generic View
+                    // 3. Checkout Template
+                    if (result.checkout_url) {
+                      templateRendered = true;
+                      templateContent.push(
+                        <div key="checkout-report" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                          <div style={{
+                            padding: '32px',
+                            background: 'var(--fg)',
+                            color: 'var(--bg)',
+                            borderRadius: '16px',
+                            textAlign: 'center',
+                            boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
+                          }}>
+                            <p style={{ fontSize: '12px', fontWeight: 700, opacity: 0.6, textTransform: 'uppercase', marginBottom: '8px' }}>Payment Total</p>
+                            <p style={{ fontSize: '48px', fontWeight: 800, color: 'var(--accent)' }}>
+                              {new Intl.NumberFormat('en-US', { style: 'currency', currency: result.currency || 'USD' }).format(result.amount)}
+                            </p>
+                          </div>
+                          <a
+                            href={result.checkout_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn btn-primary"
+                            style={{ width: '100%', justifyContent: 'center', padding: '16px', fontSize: '16px' }}
+                          >
+                            Complete Payment <CartIcon />
+                          </a>
+                        </div>
+                      );
+                    }
+
+                    // 4. Monthly Summary Template
+                    if (result.period && result.total_leads !== undefined) {
+                      templateRendered = true;
+                      templateContent.push(
+                        <div key="summary-report" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                          <div style={{ padding: '20px', background: 'var(--bg-secondary)', borderRadius: '16px', border: '1px solid var(--border)' }}>
+                            <p style={{ fontSize: '11px', fontWeight: 700, color: 'var(--fg-muted)', textTransform: 'uppercase', marginBottom: '4px' }}>Reporting Period</p>
+                            <h3 style={{ fontSize: '24px', fontWeight: 800 }}>{result.period}</h3>
+                          </div>
+
+                          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                            <div style={{ padding: '16px', background: 'var(--bg-secondary)', borderRadius: '12px', border: '1px solid var(--border)' }}>
+                              <p style={{ fontSize: '10px', fontWeight: 700, color: 'var(--fg-muted)', textTransform: 'uppercase' }}>Total Leads</p>
+                              <p style={{ fontSize: '24px', fontWeight: 800 }}>{result.total_leads}</p>
+                            </div>
+                            <div style={{ padding: '16px', background: 'var(--bg-secondary)', borderRadius: '12px', border: '1px solid var(--border)' }}>
+                              <p style={{ fontSize: '10px', fontWeight: 700, color: 'var(--fg-muted)', textTransform: 'uppercase' }}>Conversion</p>
+                              <p style={{ fontSize: '24px', fontWeight: 800, color: '#22c55e' }}>{result.conversion_rate}%</p>
+                            </div>
+                          </div>
+
+                          {result.next_action && (
+                            <div style={{ padding: '16px', background: 'var(--accent-glow)', borderRadius: '12px', border: '1px solid var(--accent)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                              <div style={{ color: 'var(--accent)', width: 16 }}><BoltIcon /></div>
+                              <p style={{ fontSize: '14px', fontWeight: 700 }}>{result.next_action}</p>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    }
+
+                    // 5. Fallback: Generic View
                     if (!templateRendered) {
                       templateContent.push(
                         <div key="generic-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '12px' }}>
