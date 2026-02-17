@@ -616,17 +616,81 @@ export default function Home() {
                     </>
                   )}
 
-                  {/* Generic - show raw JSON for unrecognized formats */}
-                  {!result.ai_score && result.leakage_detected === undefined && !result.checkout_url && !result.period && (
-                    <pre style={{ 
-                      background: 'var(--bg-secondary)', 
-                      padding: '16px', 
-                      borderRadius: '12px',
-                      overflow: 'auto'
-                    }}>
-                      {JSON.stringify(result, null, 2)}
-                    </pre>
-                  )}
+                  {/* Generic - Format any JSON response nicely */}
+                  {(() => {
+                    // Render each key-value pair as a styled row
+                    return (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        {Object.entries(result).map(([key, value]) => {
+                          // Skip complex nested objects for now
+                          if (typeof value === 'object' && value !== null) {
+                            return (
+                              <div key={key} style={{ 
+                                padding: '16px', 
+                                background: 'var(--bg-secondary)',
+                                borderRadius: '12px',
+                                border: '1px solid var(--border)'
+                              }}>
+                                <p style={{ 
+                                  fontSize: '11px', 
+                                  fontWeight: 700, 
+                                  color: 'var(--fg-muted)',
+                                  textTransform: 'uppercase',
+                                  letterSpacing: '0.08em',
+                                  marginBottom: '8px'
+                                }}>
+                                  {key.replace(/_/g, ' ')}
+                                </p>
+                                <pre style={{ 
+                                  fontSize: '13px',
+                                  margin: 0,
+                                  background: 'transparent',
+                                  fontFamily: 'monospace'
+                                }}>
+                                  {JSON.stringify(value, null, 2)}
+                                </pre>
+                              </div>
+                            )
+                          }
+                          
+                          // Style based on value type
+                          const isSuccess = key === 'success' && value === true
+                          const isScore = typeof value === 'number' && (key.includes('score') || key.includes('count') || key.includes('rate'))
+                          const isAction = key.includes('action') || key.includes('next')
+                          
+                          return (
+                            <div key={key} style={{ 
+                              padding: '16px', 
+                              background: isSuccess ? 'rgba(34, 197, 94, 0.1)' : isAction ? 'var(--accent)' : 'var(--bg-secondary)',
+                              borderRadius: '12px',
+                              border: `1px solid ${isSuccess ? '#22c55e' : isAction ? 'var(--accent)' : 'var(--border)'}`,
+                              color: isAction ? '#fff' : 'inherit'
+                            }}>
+                              <p style={{ 
+                                fontSize: '11px', 
+                                fontWeight: 700, 
+                                opacity: isAction ? 0.7 : 1,
+                                color: isAction ? '#fff' : 'var(--fg-muted)',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.08em',
+                                marginBottom: '8px'
+                              }}>
+                                {key.replace(/_/g, ' ')}
+                              </p>
+                              <p style={{ 
+                                fontSize: isScore ? '36px' : '16px', 
+                                fontWeight: isScore ? 800 : 600,
+                                color: isAction ? '#fff' : isSuccess ? '#22c55e' : 'var(--fg)',
+                                lineHeight: 1.3
+                              }}>
+                                {typeof value === 'boolean' ? (value ? '✓ Yes' : '✗ No') : String(value)}
+                              </p>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    )
+                  })()}
                 </div>
               )}
             </div>
