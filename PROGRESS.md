@@ -123,6 +123,11 @@ USING (true);
 **Note:** Create Checkout and Monthly Summary use mock data for demo purposes. The other 4 functions connect to real Supabase Edge Functions.
 
 ### Recent Updates
+- ✅ **Hero Note Updated** - Changed to "Transforms raw marketplace messages into scored opportunities"
+- ✅ **Hero CTA Updated** - "Launch Engine" → #engine, "Watch Demo" → #demo (placeholder URLs)
+- ✅ **Hero Copy Updated** - New punchy messaging: "Capture leads instantly. Qualify them automatically. Respond before competitors do."
+- ✅ **Navbar Updated** - Replaced "Engine" and "Functions" with "How It Works", "Use Cases", "Extension", "Pilot" links
+- ✅ **CTA Button Updated** - Changed "Get Started" to "Pilot Access" linking to #pilot section
 - ✅ **All 6 Cards Working** - Added back Create Checkout and Monthly Summary with mock data for demo
 - ✅ **Hybrid Architecture** - 4 cards use real Supabase functions, 2 use mock data
 - ✅ **Mock Data Implemented** - Realistic responses with 600-800ms delays for demo purposes
@@ -362,6 +367,5 @@ This allows the static site to build successfully even without GitHub Secrets co
 
 ---
 
-*Last Updated: 2026-02-16 16:50*
-*Commit: c48c60c - Full suite of premium result templates (AI, Leakage, Checkout, Summary)*
+*Last Updated: 2026-02-19*
 *Status: ✅ Layout working, ✅ All Templates LIVE, ✅ 6 Cards functional*

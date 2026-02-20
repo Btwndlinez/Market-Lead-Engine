@@ -21,12 +21,14 @@ export default function CommercialLeadGenPage() {
           <span>MLE</span>
         </div>
         <div className="nav-links">
-          <a href="/" className="nav-link">Engine</a>
-          <a href="/commercial-lead-generation" className="nav-link">Commercial</a>
+          <a href="/#workflow" className="nav-link">How It Works</a>
+          <a href="/#usecases" className="nav-link">Use Cases</a>
+          <a href="/#extension" className="nav-link">Extension</a>
+          <a href="/#pilot" className="nav-link">Pilot</a>
           <a href="https://github.com/Btwndlinez/Market-Lead-Engine" target="_blank" rel="noopener" className="nav-link">GitHub</a>
         </div>
         <div className="nav-actions">
-          <a href="#contact" className="btn btn-primary">Get Started</a>
+          <a href="/#pilot" className="btn btn-primary">Pilot Access</a>
         </div>
       </nav>
 

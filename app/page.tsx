@@ -202,8 +202,10 @@ export default function Home() {
         </div>
 
         <div className="nav-links">
-          <a href="#engine" className="nav-link">Engine</a>
-          <a href="#functions" className="nav-link">Functions</a>
+          <a href="#workflow" className="nav-link">How It Works</a>
+          <a href="#usecases" className="nav-link">Use Cases</a>
+          <a href="#extension" className="nav-link">Extension</a>
+          <a href="#pilot" className="nav-link">Pilot</a>
           <a href="https://github.com/Btwndlinez/Market-Lead-Engine" target="_blank" rel="noopener noreferrer" className="nav-link">GitHub</a>
         </div>
 
@@ -218,8 +220,8 @@ export default function Home() {
               {theme === 'light' ? <SunIcon /> : <MoonIcon />}
             </div>
           </button>
-          <a href="#engine" className="btn btn-primary" id="get-started-btn">
-            Get Started
+          <a href="#pilot" className="btn btn-primary" id="get-started-btn">
+            Pilot Access
           </a>
         </div>
       </nav>
@@ -236,8 +238,11 @@ export default function Home() {
         </h1>
 
         <p className="hero-sub">
-          Process, qualify, and convert leads with six intelligent edge functions.
-          Real-time SLA monitoring, revenue leak detection, and AI-driven insights — all in one engine.
+          Capture leads instantly.
+          Qualify them automatically.
+          Respond before competitors do.
+          <br /><br />
+          AI-guided responses, and revenue-aware workflows in real time.
         </p>
 
         <div className="hero-cta">
@@ -245,13 +250,11 @@ export default function Home() {
             Launch Engine
           </a>
           <a
-            href="https://github.com/Btwndlinez/Market-Lead-Engine"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#demo"
             className="btn btn-secondary"
             id="hero-cta-secondary"
           >
-            View on GitHub →
+            Watch Demo
           </a>
         </div>
 
@@ -259,7 +262,7 @@ export default function Home() {
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <polyline points="20 6 9 17 4 12" />
           </svg>
-          Powered by Gemini 2.0 Flash &amp; Supabase Edge Functions
+          Transforms raw marketplace messages into scored opportunities
         </p>
       </section>
 
@@ -525,8 +528,8 @@ export default function Home() {
           </div>
           <div className="footer-links">
             <a href="https://github.com/Btwndlinez/Market-Lead-Engine" target="_blank" rel="noopener noreferrer" className="footer-link">GitHub</a>
-            <a href="#engine" className="footer-link">Engine</a>
-            <a href="#functions" className="footer-link">Functions</a>
+            <a href="#workflow" className="footer-link">How It Works</a>
+            <a href="#pilot" className="footer-link">Pilot</a>
             <span className="footer-link" style={{ cursor: 'default' }}>© 2026</span>
           </div>
         </div>
